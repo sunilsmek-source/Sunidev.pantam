@@ -1,0 +1,7 @@
+.env
+.env.*
+!.env.example
+node_modules/
+.vercel/
+.pantomic-quota-secret
+.pantomic-quota-usage.json
