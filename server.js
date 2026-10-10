@@ -36,7 +36,7 @@ const googleSheetsWebhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL || (isVerce
 const publicFiles = new Map([
   ["/", "index.html"],
   ["/index.html", "index.html"],
-  ["/AI with homepage.html", "AI with homepage.html"],
+  ["/pantonic_logo.svg", "pantonic_logo.svg"],
   ["/pantomic_logo.svg", "pantomic_logo.svg"]
 ]);
 
@@ -341,6 +341,6 @@ if (!isVercel) {
       else response.destroy();
     });
   }).listen(port, host, () => {
-    console.log(`Pantomic AI is running at http://${host}:${port}`);
+    console.log(`Pantonic AI is running at http://${host}:${port}`);
   });
 }
