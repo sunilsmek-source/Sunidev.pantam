@@ -1,5 +1,5 @@
 import { handleApi } from "../server.js";
 
-export default async function signup(request, response) {
+export default async function handler(request, response) {
   await handleApi(request, response, "/api/signup");
 }
