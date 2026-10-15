@@ -1,0 +1,2547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Pantomic AI — Next-Gen Financial Intelligence Suite</title>
+<link rel="icon" type="image/svg+xml" href="pantomic_logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #090D16;
+    --bg-surface: #0F172A;
+    --bg-card: #141E33;
+    --bg-card-hover: #192642;
+    --border: #1E293B;
+    --border-light: #2D3D58;
+    --border-glow: rgba(16, 185, 129, 0.35);
+    --text: #F8FAFC;
+    --text-muted: #94A3B8;
+    --text-dim: #64748B;
+    --primary: #10B981;
+    --primary-glow: rgba(16, 185, 129, 0.25);
+    --primary-hover: #059669;
+    --indigo: #6366F1;
+    --indigo-glow: rgba(99, 102, 241, 0.25);
+    --gold: #F59E0B;
+    --gold-glow: rgba(245, 158, 11, 0.25);
+    --cyan: #06B6D4;
+    --danger: #EF4444;
+    --radius: 14px;
+    --radius-sm: 8px;
+    --radius-lg: 20px;
+    --font: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { overflow-x: hidden; }
+  html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+  body { overflow-x: hidden; max-width: 100vw; }
+
+  /* ------------------- Official Pantomic SVG Logo ------------------- */
+  .panto-svg-logo { display: inline-block; vertical-align: middle; }
+
+  /* ------------------- Landing Page ------------------- */
+  #landingPage { display: flex; flex-direction: column; min-height: 100vh; }
+
+  /* Nav */
+  .navbar {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 48px;
+    background: rgba(9, 13, 22, 0.9);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .brand-logo {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 21px; font-weight: 800; letter-spacing: -0.02em;
+    color: var(--text); text-decoration: none; cursor: pointer;
+  }
+  .brand-logo span.tag {
+    font-size: 10.5px; font-weight: 700; color: var(--primary);
+    background: rgba(16, 185, 129, 0.12);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    padding: 2px 8px; border-radius: 6px; letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+  .nav-links a { color: var(--text-muted); text-decoration: none; font-size: 14px; font-weight: 500; transition: color .2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-actions { display: flex; align-items: center; gap: 12px; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    font-family: var(--font); font-size: 13.5px; font-weight: 600;
+    padding: 10px 18px; border-radius: var(--radius-sm);
+    cursor: pointer; transition: all .2s ease; text-decoration: none; border: none;
+  }
+  .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-ghost:hover { background: var(--bg-card); border-color: var(--border-light); }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--primary), #059669);
+    color: #fff; box-shadow: 0 4px 16px var(--primary-glow);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4); }
+  .btn-gold {
+    background: linear-gradient(135deg, var(--gold), #D97706);
+    color: #fff; box-shadow: 0 4px 16px var(--gold-glow);
+  }
+  .btn-gold:hover { transform: translateY(-1px); }
+
+  /* Hero */
+  .hero-section {
+    padding: 80px 24px 60px 24px;
+    text-align: center;
+    max-width: 1040px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    color: var(--primary);
+    padding: 6px 14px; border-radius: 30px;
+    font-size: 12.5px; font-weight: 600; margin-bottom: 22px;
+  }
+  .hero-title {
+    font-size: 54px; font-weight: 800; line-height: 1.15;
+    letter-spacing: -0.03em; margin-bottom: 20px;
+    background: linear-gradient(180deg, #FFFFFF 30%, #94A3B8 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .hero-title em { font-style: normal; color: var(--primary); -webkit-text-fill-color: var(--primary); }
+  .hero-desc {
+    font-size: 17px; line-height: 1.65; color: var(--text-muted);
+    max-width: 740px; margin: 0 auto 34px auto;
+  }
+  .hero-actions { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 36px; }
+
+  .hero-stat-bar {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+    max-width: 900px; margin: 0 auto;
+    background: var(--bg-surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px 24px;
+  }
+  .h-stat { text-align: center; border-right: 1px solid var(--border); }
+  .h-stat:last-child { border-right: none; }
+  .h-stat-num { font-size: 22px; font-weight: 800; color: #fff; font-family: var(--mono); }
+  .h-stat-lbl { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  /* Bots Grid Section */
+  .section-wrap { max-width: 1200px; margin: 0 auto; padding: 75px 24px; }
+  .section-head { text-align: center; margin-bottom: 46px; }
+  .section-tag { font-size: 12px; font-weight: 700; color: var(--primary); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+  .section-title { font-size: 36px; font-weight: 800; letter-spacing: -0.02em; }
+  .section-sub { font-size: 15.5px; color: var(--text-muted); margin-top: 10px; max-width: 620px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+
+  /* High-Impact Bots Suite Grid */
+  .bots-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+  }
+  .bot-card {
+    background: var(--bg-surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 24px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    transition: all .25s ease; position: relative; overflow: hidden;
+  }
+  .bot-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: transparent; transition: background .2s;
+  }
+  .bot-card:hover {
+    border-color: var(--border-glow); transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    background: var(--bg-card-hover);
+  }
+  .bot-card:hover::before { background: var(--primary); }
+
+  .bot-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .bot-icon-shell {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    color: var(--primary);
+  }
+  .line-icon { width: 21px; height: 21px; display: block; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .feature-icon { width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; color: var(--primary); }
+  .feature-icon .line-icon { width: 19px; height: 19px; }
+  .bot-status-pill {
+    font-size: 11px; font-weight: 700; color: var(--primary);
+    background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2);
+    padding: 3px 8px; border-radius: 12px; display: inline-flex; align-items: center; gap: 4px;
+  }
+  .bot-status-pill span.pulse {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--primary);
+    box-shadow: 0 0 8px var(--primary);
+  }
+
+  .bot-market-tag {
+    font-size: 11px; font-weight: 700; color: var(--text-dim);
+    letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px;
+  }
+  .bot-title { font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 8px; line-height: 1.3; }
+  .bot-desc { font-size: 13px; line-height: 1.6; color: var(--text-muted); margin-bottom: 18px; flex: 1; }
+
+  .bot-launch-btn {
+    width: 100%; padding: 9px 12px; border-radius: var(--radius-sm);
+    background: var(--bg-card); border: 1px solid var(--border-light);
+    color: var(--text); font-size: 12.5px; font-weight: 600;
+    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;
+    transition: all .2s; font-family: var(--font);
+  }
+  .bot-card:hover .bot-launch-btn {
+    background: linear-gradient(135deg, var(--primary), #059669);
+    border-color: var(--primary); color: #fff; box-shadow: 0 4px 12px var(--primary-glow);
+  }
+
+  /* Core Architecture 4 Cards */
+  .features-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+    margin-top: 40px;
+  }
+  .f-strip-card {
+    background: var(--bg-surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 22px;
+  }
+  .f-strip-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: #fff; display: flex; align-items: center; gap: 8px; }
+  .f-strip-card p { font-size: 12.5px; line-height: 1.55; color: var(--text-muted); }
+
+  /* Pricing */
+  .pricing-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; max-width: 860px; margin: 0 auto; }
+  .pricing-card {
+    background: var(--bg-surface); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 36px 32px;
+    position: relative; display: flex; flex-direction: column;
+  }
+  .pricing-card.popular {
+    border-color: var(--primary);
+    box-shadow: 0 0 30px rgba(16, 185, 129, 0.15);
+    background: linear-gradient(180deg, rgba(16, 185, 129, 0.04) 0%, var(--bg-surface) 100%);
+  }
+  .popular-tag {
+    position: absolute; top: -12px; right: 28px;
+    background: linear-gradient(135deg, var(--primary), #059669);
+    color: #fff; font-size: 11px; font-weight: 700;
+    padding: 4px 12px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .pricing-name { font-size: 16px; font-weight: 700; color: var(--text-muted); }
+  .pricing-price { font-size: 40px; font-weight: 800; margin: 12px 0 6px 0; color: #fff; }
+  .pricing-price span { font-size: 14px; font-weight: 500; color: var(--text-muted); }
+  .pricing-desc { font-size: 13.5px; color: var(--text-muted); margin-bottom: 24px; }
+  .pricing-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; flex: 1; }
+  .pricing-list li { font-size: 14px; color: var(--text); display: flex; align-items: center; gap: 10px; }
+  .pricing-list li i { color: var(--primary); font-style: normal; font-weight: 800; }
+
+  /* Footer */
+  .footer {
+    border-top: 1px solid var(--border); padding: 36px 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    color: var(--text-dim); font-size: 13px;
+  }
+  .footer-links { display: flex; gap: 24px; }
+  .footer-links a { color: var(--text-muted); text-decoration: none; cursor: pointer; }
+  .footer-links a:hover { color: var(--text); }
+
+  /* ------------------- Chatbot App Layout (Full Flex Flow) ------------------- */
+  #chatApp {
+    display: none; height: 100vh; max-height: 100vh; overflow: hidden;
+    grid-template-columns: 280px 1fr;
+  }
+
+  /* Sidebar */
+  .chat-sidebar {
+    background: var(--bg-surface); border-right: 1px solid var(--border);
+    display: flex; flex-direction: column; padding: 20px 18px;
+    height: 100%; overflow-y: auto;
+  }
+  .sidebar-brand {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .btn-new-chat {
+    width: 100%; background: linear-gradient(135deg, var(--primary), #059669);
+    color: #fff; border: none; padding: 12px; border-radius: var(--radius-sm);
+    font-weight: 700; font-size: 13.5px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    margin-bottom: 20px; transition: transform .15s;
+    box-shadow: 0 4px 14px var(--primary-glow);
+  }
+  .btn-new-chat:hover { transform: translateY(-1px); }
+
+  .sidebar-section { margin-bottom: 22px; }
+  .sidebar-section-title {
+    font-size: 11px; font-weight: 700; color: var(--text-dim);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px;
+  }
+
+  .model-card-picker {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 6px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .model-opt {
+    padding: 8px 10px; border-radius: 6px; font-size: 12.5px;
+    display: flex; align-items: center; justify-content: space-between;
+    cursor: pointer; color: var(--text-muted); transition: all .15s;
+  }
+  .model-opt:hover { background: rgba(255, 255, 255, 0.05); color: var(--text); }
+  .model-opt.active { background: rgba(16, 185, 129, 0.12); color: var(--primary); font-weight: 600; }
+  .model-opt .badge-lock { font-size: 10px; background: rgba(245, 158, 11, 0.15); color: var(--gold); padding: 2px 6px; border-radius: 4px; font-weight: 700; }
+
+  /* Usage Box */
+  .usage-box {
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 14px;
+    margin-top: auto;
+  }
+  .usage-header { display: flex; justify-content: space-between; font-size: 12px; font-weight: 600; margin-bottom: 6px; }
+  .usage-header span.num { color: var(--primary); font-weight: 700; font-family: var(--mono); }
+  .progress-track { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; margin-bottom: 10px; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--indigo)); width: 0%; transition: width .3s; }
+  .usage-note { font-size: 11px; color: var(--text-dim); }
+
+  .user-footer-card {
+    margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .user-info { display: flex; align-items: center; gap: 10px; }
+  .user-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--indigo); color: #fff; font-size: 12px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .user-meta { font-size: 12px; font-weight: 600; line-height: 1.3; }
+  .user-meta span { display: block; font-size: 10.5px; color: var(--text-muted); font-weight: 400; }
+  .sidebar-action-btn { background: none; border: none; color: var(--text-dim); cursor: pointer; padding: 4px; font-size: 15px; }
+  .sidebar-action-btn:hover { color: var(--text); }
+
+  /* Main Chat Window (Flex Column, Scroll Never Blocked) */
+  .chat-main {
+    display: flex; flex-direction: column; height: 100vh; max-height: 100vh;
+    background: var(--bg); overflow: hidden; position: relative;
+  }
+  .chat-topbar {
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 28px; border-bottom: 1px solid var(--border);
+    background: rgba(9, 13, 22, 0.85); backdrop-filter: blur(12px);
+    z-index: 10;
+  }
+  .chat-model-indicator {
+    display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: var(--text-muted);
+  }
+  .chat-model-indicator span.badge {
+    background: rgba(16, 185, 129, 0.12); color: var(--primary);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 700;
+  }
+  .chat-topbar-actions { display: flex; align-items: center; gap: 10px; }
+
+  /* Message Stream (Auto-scrolls smoothly to the very bottom) */
+  .chat-stream {
+    flex: 1 1 auto;
+    overflow-y: auto; overflow-x: hidden;
+    padding: 24px 24px;
+    display: flex; flex-direction: column; align-items: center;
+    scroll-behavior: smooth;
+  }
+  .stream-inner {
+    width: 100%; max-width: 780px;
+    display: flex; flex-direction: column; gap: 20px;
+    padding-bottom: 24px;
+  }
+
+  /* Empty State */
+  .chat-hero-empty { text-align: center; margin: auto 0; padding: 36px 0; }
+  .chat-hero-empty h2 { font-size: 32px; font-weight: 800; margin-bottom: 10px; }
+  .chat-hero-empty p { font-size: 14.5px; color: var(--text-muted); max-width: 500px; margin: 0 auto 28px auto; }
+  .quick-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; max-width: 640px; margin: 0 auto; }
+  .quick-chip {
+    background: var(--bg-surface); border: 1px solid var(--border);
+    color: var(--text-muted); padding: 9px 15px; border-radius: 10px;
+    font-size: 13px; cursor: pointer; transition: all .15s;
+  }
+  .quick-chip:hover { border-color: var(--primary); color: var(--text); background: var(--bg-card); }
+
+  /* Messages */
+  .msg-row { display: flex; gap: 14px; width: 100%; animation: fadeIn .25s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .msg-row.user { justify-content: flex-end; }
+  .msg-row.ai { justify-content: flex-start; }
+
+  .msg-avatar {
+    width: 32px; height: 32px; border-radius: 9px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 800; flex-shrink: 0;
+  }
+  .msg-row.user .msg-avatar { display: none; }
+  .msg-row.ai .msg-avatar {
+    background: linear-gradient(135deg, var(--primary), var(--indigo));
+    color: #fff; box-shadow: 0 0 12px var(--primary-glow);
+  }
+
+  .msg-bubble {
+    max-width: 82%; font-size: 14.5px; line-height: 1.6;
+    border-radius: var(--radius); padding: 14px 18px;
+  }
+  .msg-row.user .msg-bubble {
+    background: var(--bg-card); color: var(--text);
+    border: 1px solid var(--border-light);
+    border-bottom-right-radius: 4px;
+  }
+  .msg-row.ai .msg-bubble {
+    background: var(--bg-surface); color: var(--text);
+    border: 1px solid var(--border);
+    border-bottom-left-radius: 4px;
+  }
+
+  .msg-bubble p { margin-bottom: 8px; }
+  .msg-bubble p:last-child { margin-bottom: 0; }
+  .msg-bubble ul, .msg-bubble ol { margin-left: 20px; margin-bottom: 8px; }
+  .msg-bubble li { margin-bottom: 4px; }
+  .msg-bubble h3, .msg-bubble h4, .msg-bubble h5 { color: var(--primary); font-weight: 800; line-height: 1.35; margin: 11px 0 6px; }
+  .msg-bubble h3 { font-size: 16px; padding-bottom: 5px; border-bottom: 1px solid var(--border); }
+  .msg-bubble h4 { font-size: 14.5px; }
+  .msg-bubble h5 { font-size: 13.5px; }
+  .msg-bubble ul, .msg-bubble ol { display: flex; flex-direction: column; gap: 5px; padding-left: 20px; }
+  .msg-bubble li::marker { color: var(--primary); font-weight: 700; }
+  .msg-bubble blockquote { margin: 8px 0; padding: 8px 12px; border-left: 3px solid var(--primary); border-radius: 0 8px 8px 0; background: rgba(16, 185, 129, 0.08); color: var(--text-muted); }
+  .msg-bubble code { font-family: var(--mono); font-size: 0.9em; color: var(--cyan); background: var(--bg-card); padding: 2px 5px; border-radius: 4px; }
+  .msg-bubble pre { margin: 8px 0; padding: 11px 13px; overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text-muted); }
+  .msg-bubble pre code { padding: 0; color: inherit; background: transparent; }
+  .msg-bubble hr { border: 0; height: 1px; margin: 10px 0; background: var(--border); }
+  .msg-bubble strong { color: #fff; font-weight: 700; }
+
+  .user-attached-thumb {
+    max-width: 300px; max-height: 200px; border-radius: 8px;
+    margin-top: 8px; display: block; border: 1px solid var(--border-light);
+  }
+
+  .msg-actions {
+    display: flex; align-items: center; gap: 8px; margin-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 6px;
+  }
+  .btn-voice-listen {
+    background: transparent; border: 1px solid var(--border); color: var(--text-dim);
+    font-size: 11.5px; padding: 3px 8px; border-radius: 6px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 4px; transition: all .15s;
+  }
+  .btn-voice-listen:hover { border-color: var(--primary); color: var(--primary); background: rgba(16, 185, 129, 0.08); }
+  .btn-voice-listen.speaking { border-color: var(--primary); color: var(--primary); background: rgba(16, 185, 129, 0.15); }
+
+  /* Limit warning in chat */
+  .limit-box {
+    background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #FCA5A5; padding: 16px; border-radius: 12px; font-size: 14px;
+  }
+  .limit-box b { color: #fff; display: block; font-size: 15px; margin-bottom: 4px; }
+
+  /* Input Dock (Fixed at bottom via Flex, never overlaps messages) */
+  .input-dock {
+    flex-shrink: 0;
+    padding: 12px 24px 18px 24px;
+    background: var(--bg-surface);
+    border-top: 1px solid var(--border);
+    display: flex; flex-direction: column; align-items: center;
+    z-index: 10;
+  }
+  .input-box {
+    width: 100%; max-width: 780px;
+    background: var(--bg); border: 1px solid var(--border-light);
+    border-radius: var(--radius); padding: 10px 14px 10px 18px;
+    display: flex; flex-direction: column; gap: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    transition: border-color .2s;
+  }
+  .input-box:focus-within { border-color: var(--primary); }
+
+  .input-row { display: flex; align-items: flex-end; gap: 12px; }
+  .input-box textarea {
+    flex: 1; background: transparent; border: none; outline: none;
+    color: var(--text); font-family: var(--font); font-size: 14.5px;
+    resize: none; max-height: 120px; padding: 6px 0;
+  }
+  .input-box textarea::placeholder { color: var(--text-dim); }
+
+  .input-controls {
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 8px;
+  }
+  .input-tools { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .input-tools-desktop {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .input-tools-mobile {
+    display: none !important;
+  }
+  .tool-pill {
+    background: var(--bg-card); border: 1px solid var(--border);
+    color: var(--text-muted); font-size: 11.5px; font-weight: 600;
+    padding: 4px 10px; border-radius: 6px; cursor: pointer; transition: all .15s;
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .tool-pill:hover { border-color: var(--primary); color: var(--text); }
+  .tool-pill.active { background: rgba(16, 185, 129, 0.15); color: var(--primary); border-color: rgba(16, 185, 129, 0.3); }
+
+  /* Input Dock Bots & Tools Popover Dropdown */
+  .bot-tools-dropdown-container {
+    position: relative;
+    display: inline-block;
+  }
+  .bot-tools-menu {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 0;
+    width: 290px;
+    max-width: calc(100vw - 32px);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    padding: 6px;
+    box-shadow: 0 -12px 36px rgba(0, 0, 0, 0.7);
+    display: none;
+    flex-direction: column;
+    gap: 3px;
+    z-index: 100;
+    max-height: 380px;
+    overflow-y: auto;
+  }
+  .bot-tools-menu.open {
+    display: flex;
+    animation: fadeIn .18s ease;
+  }
+  .bot-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px 6px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
+  }
+  .bot-menu-header .badge-lock {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--gold);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 9.5px;
+    font-weight: 700;
+  }
+  .bot-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .15s;
+    background: var(--bg-card);
+    border: 1px solid transparent;
+  }
+  .bot-menu-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--border-light);
+  }
+  .bot-menu-item .item-icon {
+    font-size: 13px;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: rgba(245, 158, 11, 0.1);
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+  .bot-menu-item .item-text {
+    flex: 1;
+    min-width: 0;
+  }
+  .bot-menu-item .item-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .bot-menu-item .item-desc {
+    font-size: 10.5px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 1px;
+  }
+  .bot-menu-item .lock-tag {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: var(--gold);
+    background: rgba(245, 158, 11, 0.12);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    padding: 2px 5px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .bot-menu-footer {
+    padding: 8px 10px;
+    margin-top: 4px;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary);
+    text-align: center;
+    cursor: pointer;
+    background: rgba(16, 185, 129, 0.08);
+    border-radius: 6px;
+    transition: background .15s;
+  }
+  .bot-menu-footer:hover {
+    background: rgba(16, 185, 129, 0.15);
+  }
+
+  .toast-notification {
+    position: fixed; bottom: 24px; right: 24px;
+    background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(8px);
+    border: 1px solid rgba(245, 158, 11, 0.5);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 158, 11, 0.25);
+    color: #fff; padding: 12px 18px; border-radius: 10px;
+    font-size: 13px; line-height: 1.4; max-width: 420px;
+    display: flex; align-items: center; gap: 10px;
+    z-index: 9999; transform: translateY(120px); opacity: 0;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+  }
+  .toast-notification.show { transform: translateY(0); opacity: 1; pointer-events: auto; }
+
+  .btn-send {
+    width: 36px; height: 36px; border-radius: 9px;
+    background: linear-gradient(135deg, var(--primary), #059669);
+    border: none; color: #fff; font-size: 15px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: transform .15s; box-shadow: 0 2px 10px var(--primary-glow);
+  }
+  .btn-send:hover { transform: scale(1.05); }
+  .btn-send:disabled { background: var(--border); cursor: not-allowed; transform: none; box-shadow: none; }
+
+  .dock-disclaimer { font-size: 11.5px; color: var(--text-dim); text-align: center; margin-top: 6px; }
+
+  /* ------------------- Modals ------------------- */
+  .modal-overlay {
+    position: fixed; inset: 0; background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px); display: none;
+    align-items: center; justify-content: center; z-index: 100; padding: 20px;
+  }
+  .modal-overlay.active { display: flex; }
+  .modal-window {
+    background: var(--bg-surface); border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg); width: 100%; max-width: 460px;
+    padding: 32px; position: relative; max-height: 90vh; overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  }
+  .modal-close {
+    position: absolute; top: 20px; right: 20px;
+    background: none; border: none; color: var(--text-muted);
+    font-size: 20px; cursor: pointer; line-height: 1;
+  }
+  .modal-close:hover { color: var(--text); }
+  .modal-icon { width: 44px; height: 44px; margin-bottom: 16px; }
+  .modal-title { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+  .modal-sub { font-size: 13.5px; color: var(--text-muted); margin-bottom: 22px; line-height: 1.5; }
+
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .form-input {
+    width: 100%; background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: var(--radius-sm); padding: 11px 14px; color: var(--text);
+    font-family: var(--font); font-size: 14px; outline: none; transition: border-color .15s;
+  }
+  .form-input:focus { border-color: var(--primary); }
+  .market-checkboxes {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 6px;
+  }
+  .market-chk-label {
+    display: flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--text);
+    background: var(--bg-card); padding: 8px 10px; border-radius: 6px; border: 1px solid var(--border);
+    cursor: pointer;
+  }
+  .market-chk-label input { accent-color: var(--primary); }
+
+  .form-submit {
+    width: 100%; background: linear-gradient(135deg, var(--primary), #059669);
+    color: #fff; border: none; border-radius: var(--radius-sm); padding: 12px;
+    font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 8px;
+    box-shadow: 0 4px 16px var(--primary-glow);
+  }
+  .form-submit:hover { opacity: 0.95; }
+  .modal-foot-link { text-align: center; margin-top: 14px; font-size: 12.5px; color: var(--text-dim); }
+  .modal-foot-link a { color: var(--primary); font-weight: 600; text-decoration: none; cursor: pointer; }
+  .modal-foot-link a:hover { text-decoration: underline; }
+
+  /* Profile Details */
+  .profile-list { display: flex; flex-direction: column; gap: 10px; background: var(--bg-card); border: 1px solid var(--border); padding: 16px; border-radius: var(--radius-sm); margin-bottom: 20px; }
+  .profile-item { display: flex; justify-content: space-between; font-size: 13px; }
+  .profile-item span.lbl { color: var(--text-muted); }
+  .profile-item span.val { font-weight: 600; color: var(--text); }
+
+  /* =================== MOBILE HAMBURGER MENU =================== */
+  .hamburger-btn {
+    display: none; flex-direction: column; justify-content: center; gap: 5px;
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 10px; cursor: pointer; transition: all .2s;
+  }
+  .hamburger-btn:hover { border-color: var(--primary); background: rgba(16,185,129,0.06); }
+  .hamburger-btn span {
+    display: block; width: 20px; height: 2px;
+    background: var(--text-muted); border-radius: 2px; transition: all .25s;
+  }
+  .hamburger-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--primary); }
+  .hamburger-btn.open span:nth-child(2) { opacity: 0; }
+  .hamburger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--primary); }
+
+  .mobile-nav-drawer {
+    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(9,13,22,0.98); backdrop-filter: blur(20px);
+    z-index: 200; flex-direction: column; align-items: center; justify-content: center;
+    gap: 10px; opacity: 0; pointer-events: none; transition: opacity .25s;
+  }
+  .mobile-nav-drawer.open { opacity: 1; pointer-events: auto; }
+  .mobile-nav-drawer a, .mobile-nav-drawer button {
+    font-size: 22px; font-weight: 700; color: var(--text); text-decoration: none;
+    padding: 14px 40px; border-radius: var(--radius); width: 80%; text-align: center;
+    border: 1px solid var(--border); background: var(--bg-surface); transition: all .2s;
+    cursor: pointer; font-family: var(--font);
+  }
+  .mobile-nav-drawer a:hover, .mobile-nav-drawer button:hover { border-color: var(--primary); color: var(--primary); }
+  .mobile-nav-drawer .drawer-close {
+    position: absolute; top: 20px; right: 20px; background: none; border: none;
+    color: var(--text-muted); font-size: 28px; cursor: pointer;
+  }
+  .mobile-nav-drawer .btn-primary-nav {
+    background: linear-gradient(135deg, var(--primary), #059669);
+    border-color: var(--primary); color: #fff; margin-top: 8px;
+  }
+
+  /* =================== CHAT MOBILE =================== */
+  .chat-mobile-topbar {
+    display: none; align-items: center; justify-content: space-between;
+    padding: 12px 16px; border-bottom: 1px solid var(--border);
+    background: rgba(9,13,22,0.95); backdrop-filter: blur(12px);
+    flex-shrink: 0; position: relative; z-index: 20;
+  }
+  .chat-mobile-topbar .mobile-brand {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 16px; font-weight: 800; color: var(--text);
+  }
+  .btn-mobile-menu {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    color: var(--text-muted); padding: 6px 10px; cursor: pointer;
+    display: flex; align-items: center; gap: 6px; font-family: var(--font); font-size: 12px;
+    font-weight: 600; transition: all .2s;
+  }
+  .btn-mobile-menu:hover { border-color: var(--primary); color: var(--primary); }
+
+
+
+  .chat-sidebar-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.6); z-index: 300; backdrop-filter: blur(4px);
+  }
+  .chat-sidebar-overlay.open { display: block; }
+  .chat-sidebar-sheet {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--bg-surface); border-top: 1px solid var(--border-light);
+    border-radius: 20px 20px 0 0; padding: 0 18px 32px 18px;
+    z-index: 400; transform: translateY(100%); transition: transform .3s cubic-bezier(0.16,1,0.3,1);
+    max-height: 85vh; overflow-y: auto;
+  }
+  .chat-sidebar-sheet.open { transform: translateY(0); }
+  .sheet-handle { width: 36px; height: 4px; background: var(--border-light); border-radius: 2px; margin: 12px auto 18px auto; }
+  .sheet-user-info { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+  .sheet-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--indigo); color: #fff; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+  .sheet-user-meta .name { font-size: 15px; font-weight: 700; }
+  .sheet-user-meta .plan { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .sheet-actions { display: flex; flex-direction: column; gap: 10px; }
+  .sheet-action-btn { width: 100%; padding: 13px 16px; border-radius: var(--radius-sm); background: var(--bg-card); border: 1px solid var(--border); color: var(--text); font-size: 14px; font-weight: 600; font-family: var(--font); cursor: pointer; display: flex; align-items: center; gap: 10px; transition: all .2s; text-align: left; }
+  .sheet-action-btn:hover { border-color: var(--primary); color: var(--primary); background: rgba(16,185,129,0.06); }
+  .sheet-action-btn.danger:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.06); }
+  .sheet-action-btn.gold-btn { background: linear-gradient(135deg, var(--gold), #D97706); border-color: var(--gold); color: #fff; }
+
+  /* =================== TABLET =================== */
+  @media (max-width: 1080px) {
+    .bots-grid { grid-template-columns: repeat(2, 1fr); }
+    .features-strip { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* =================== MOBILE =================== */
+  @media (max-width: 860px) {
+    /* === ABSOLUTE ZERO HORIZONTAL SCROLL ENFORCEMENT === */
+    html, body {
+      max-width: 100vw !important;
+      overflow-x: hidden !important;
+      position: relative;
+    }
+    #landingPage, #chatApp, section, nav, main, aside, footer,
+    .navbar, .hero-section, .section-wrap, .bots-grid, .features-strip,
+    .pricing-grid, .hero-stat-bar, .stream-inner, .input-dock, .input-box {
+      max-width: 100% !important;
+      overflow-x: hidden !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Navbar */
+    .navbar { padding: 12px 14px; max-width: 100%; }
+    .brand-logo { font-size: 18px; gap: 8px; }
+    .brand-logo span.tag { display: none !important; }
+    .nav-links { display: none !important; }
+    .hamburger-btn { display: flex; }
+    .mobile-nav-drawer { display: flex; }
+    .nav-actions { gap: 8px; }
+    .nav-actions .btn-ghost { display: none !important; }
+    .nav-actions .btn-primary { padding: 8px 12px; font-size: 11.5px; white-space: nowrap; }
+
+    /* Hero */
+    .hero-section { padding: 36px 14px 28px; max-width: 100%; }
+    .hero-badge {
+      font-size: 10px; padding: 6px 10px;
+      white-space: normal; text-align: center;
+      word-break: break-word; max-width: 100%;
+      line-height: 1.4;
+    }
+    .hero-title { font-size: 26px; line-height: 1.25; word-break: break-word; }
+    .hero-desc { font-size: 13.5px; line-height: 1.55; margin-bottom: 24px; }
+    .hero-actions { flex-direction: column; gap: 10px; width: 100%; }
+    .hero-actions .btn { width: 100%; justify-content: center; padding: 12px 16px; font-size: 13.5px; }
+    .hero-stat-bar {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      padding: 0; border-radius: var(--radius-sm); width: 100%;
+    }
+    .h-stat { padding: 10px 6px; border-right: none; border-bottom: 1px solid var(--border); }
+    .h-stat:nth-child(odd) { border-right: 1px solid var(--border); }
+    .h-stat:nth-child(3), .h-stat:nth-child(4) { border-bottom: none; }
+    .h-stat-num { font-size: 16px; }
+    .h-stat-lbl { font-size: 10.5px; }
+
+    /* Bots Grid — STRICTLY VERTICAL ONLY, zero horizontal scroll */
+    .section-wrap { padding: 36px 14px; width: 100%; max-width: 100%; }
+    .section-head { margin-bottom: 20px; }
+    .section-title { font-size: 23px; }
+    .section-sub { font-size: 13px; line-height: 1.5; }
+    .bots-grid {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 14px !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: hidden !important;
+      padding: 0 !important;
+    }
+    .bot-card {
+      width: 100% !important; min-width: 0 !important; max-width: 100% !important;
+      flex-shrink: 0 !important; transform: none !important;
+      box-sizing: border-box !important;
+    }
+    .bot-card:hover { transform: none !important; }
+
+    /* Features strip */
+    .features-strip {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 12px !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      margin-top: 24px;
+    }
+    .f-strip-card { width: 100% !important; box-sizing: border-box !important; }
+
+    /* Pricing */
+    .pricing-grid {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 16px !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      padding: 0 !important;
+    }
+    .pricing-card { width: 100% !important; box-sizing: border-box !important; padding: 22px 16px !important; }
+
+    /* Footer */
+    .footer { flex-direction: column; gap: 12px; text-align: center; padding: 20px 14px; }
+    .footer-links { flex-wrap: wrap; justify-content: center; gap: 12px; }
+
+    /* ---- CHATBOT MOBILE LAYOUT ---- */
+    #chatApp { grid-template-columns: 1fr; width: 100%; max-width: 100vw; height: 100dvh; max-height: 100dvh; }
+    .chat-sidebar { display: none !important; }
+    .chat-topbar { display: none !important; }
+    .chat-mobile-topbar { display: flex; width: 100%; max-width: 100%; }
+
+    .chat-main { max-width: 100vw; overflow-x: hidden; width: 100%; height: 100dvh; max-height: 100dvh; }
+    .chat-stream { padding: 12px 10px; overflow-x: hidden; width: 100%; }
+    .stream-inner { gap: 12px; width: 100%; max-width: 100%; }
+
+    .msg-row { width: 100%; max-width: 100%; }
+    .msg-bubble { max-width: 86%; font-size: 13.5px; padding: 10px 12px; word-break: break-word; overflow-wrap: break-word; }
+    .chat-hero-empty { padding: 18px 0; }
+    .chat-hero-empty h2 { font-size: 20px; word-break: break-word; }
+    .chat-hero-empty p { font-size: 12.5px; }
+    .quick-chips { gap: 6px; width: 100%; }
+    .quick-chip { font-size: 11.5px; padding: 6px 10px; word-break: break-word; max-width: 100%; }
+
+    .input-dock { padding: 8px 10px 14px; width: 100%; max-width: 100%; }
+    .input-box { padding: 8px 10px; width: 100%; max-width: 100%; }
+    .input-box textarea { font-size: 13.5px; }
+    .input-tools { gap: 5px; flex-wrap: wrap; }
+    .input-tools-desktop { display: none !important; }
+    .input-tools-mobile { display: inline-flex !important; align-items: center; gap: 6px; }
+    .tool-pill { font-size: 10px; padding: 3px 7px; }
+
+    /* Modals fit strictly within mobile screen */
+    .modal-overlay { padding: 12px; }
+    .modal-window { padding: 22px 16px !important; width: 100% !important; max-width: 100% !important; border-radius: 14px; }
+    .modal-title { font-size: 20px; }
+    .modal-sub { font-size: 12.5px; margin-bottom: 16px; }
+    .toast-notification { right: 12px; left: 12px; max-width: calc(100vw - 24px); }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title { font-size: 22px; }
+    .hero-badge { font-size: 9.5px; }
+    .nav-actions .btn-primary { font-size: 10.5px; padding: 6px 10px; }
+    .h-stat-num { font-size: 15px; }
+    .chat-hero-empty h2 { font-size: 18px; }
+    .msg-bubble { max-width: 90%; }
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     1. LANDING PAGE WITH SPECIALIZED FINANCE AI BOTS SUITE
+     ============================================================ -->
+<div id="landingPage">
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="brand-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      <!-- Official Pantomic SVG Logo -->
+      <svg class="panto-svg-logo" width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="8" y="8" width="84" height="84" rx="22" fill="#0F172A" stroke="#1E293B" stroke-width="2.5"/>
+        <path d="M32 72 V28 H54 C62.8366 28 70 35.1634 70 44 C70 52.8366 62.8366 60 54 60 H44 V72 H32 Z" 
+              stroke="#10B981" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="44" cy="44" r="5" fill="#10B981"/>
+        <circle cx="70" cy="44" r="3.5" fill="#06B6D4"/>
+        <line x1="32" y1="44" x2="44" y2="44" stroke="#10B981" stroke-width="4.5" stroke-linecap="round"/>
+      </svg>
+      <span>Pantomic</span>
+      <span class="tag">AI Finance Suite</span>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="#bots" onclick="smoothScroll(event,'bots')">AI Bots</a></li>
+      <li><a href="#features" onclick="smoothScroll(event,'features')">Capabilities</a></li>
+      <li><a href="#pricing" onclick="smoothScroll(event,'pricing')">Pricing</a></li>
+    </ul>
+
+    <div class="nav-actions" id="navAuthActions">
+      <button class="btn btn-ghost" onclick="openLoginModal()">Log In</button>
+      <button class="btn btn-primary" onclick="openSignupModal()">Create Free Account</button>
+      <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Full-Screen Nav Drawer -->
+  <div class="mobile-nav-drawer" id="mobileNavDrawer">
+    <button class="drawer-close" onclick="toggleMobileNav()">✕</button>
+    <a href="#bots" onclick="toggleMobileNav(); smoothScroll(null,'bots')">🤖 AI Bots</a>
+    <a href="#features" onclick="toggleMobileNav(); smoothScroll(null,'features')">⚡ Capabilities</a>
+    <a href="#pricing" onclick="toggleMobileNav(); smoothScroll(null,'pricing')">💎 Pricing</a>
+    <button onclick="toggleMobileNav(); openLoginModal()">Log In</button>
+    <button class="btn-primary-nav" onclick="toggleMobileNav(); openSignupModal()">🚀 Create Free Account</button>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-badge">
+      <span class="feature-icon" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/><path d="m19 14 .9 2.1L22 17l-2.1.9L19 20l-.9-2.1L16 17l2.1-.9L19 14Z"/></svg></span> High-Performance AI Financial Intelligence · NSE · BSE · MCX · Crypto · Forex
+    </div>
+    <h1 class="hero-title">
+      An entire trading desk of <em>Specialized Financial AI Bots</em>.
+    </h1>
+    <p class="hero-desc">
+      Stop reading walls of generic text. Pantomic AI deploys dedicated intelligence bots built specifically for Options Scalping, Equity Breakouts, MCX Commodities, Crypto, and Macro Forex. Short, sharp, and actionable.
+    </p>
+
+    <div class="hero-actions">
+      <button class="btn btn-primary" style="padding:14px 28px;font-size:15px;" onclick="handleHeroStart()">
+        Start Free Chat (10 Free Queries/Day)
+      </button>
+      <button class="btn btn-ghost" style="padding:14px 22px;font-size:15px;" onclick="smoothScroll(null,'bots')">
+        Explore AI Bots ▾
+      </button>
+    </div>
+
+    <!-- Live Platform Stat Bar -->
+    <div class="hero-stat-bar">
+      <div class="h-stat">
+        <div class="h-stat-num">8 Active</div>
+        <div class="h-stat-lbl">Specialized Market Bots</div>
+      </div>
+      <div class="h-stat">
+        <div class="h-stat-num">10/Day</div>
+        <div class="h-stat-lbl">Daily Free Queries</div>
+      </div>
+      <div class="h-stat">
+        <div class="h-stat-num">&lt;1.8s</div>
+        <div class="h-stat-lbl">Fast AI Response Speed</div>
+      </div>
+      <div class="h-stat">
+        <div class="h-stat-num">₹1,999</div>
+        <div class="h-stat-lbl">Unlimited Premium Pass</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPECIALIZED AI BOTS SUITE SECTION -->
+  <section class="section-wrap" id="bots">
+    <div class="section-head">
+      <div class="section-tag">Dedicated AI Desks</div>
+      <h2 class="section-title">Specialized Financial AI Chatbots</h2>
+      <p class="section-sub">Each AI bot is fine-tuned for a specific trading discipline. Pick a bot to start an instant focused session.</p>
+    </div>
+
+    <div class="bots-grid">
+      <!-- Bot 1 -->
+      <div class="bot-card" onclick="launchBotWithPreset('Nifty & BankNifty F&O Scalper Bot', 'Options trading: Nifty/BankNifty support levels, highest OI strikes, and expiry strategy.')">
+        <div>
+          <div class="bot-header">
+            <div class="bot-icon-shell"><svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 4v16M12 7v10M18 3v18"/><rect x="4" y="8" width="4" height="5" rx=".7"/><rect x="10" y="10" width="4" height="4" rx=".7"/><rect x="16" y="7" width="4" height="6" rx=".7"/></svg></div>
+            <div class="bot-status-pill"><span class="pulse"></span> Online</div>
+          </div>
+          <div class="bot-market-tag">NSE &amp; BSE Derivatives</div>
+          <h3 class="bot-title">Nifty &amp; BankNifty F&amp;O Scalper</h3>
+          <p class="bot-desc">Analyzes call/put Open Interest, strike selection, theta time decay, and intraday index reversal levels.</p>
+        </div>
+        <button class="bot-launch-btn">Chat with Scalper Bot ➔</button>
+      </div>
+
+      <!-- Bot 2 -->
+      <div class="bot-card" onclick="launchBotWithPreset('Equity Breakout & Swing Bot', 'Find high-probability swing breakout setups in NSE/BSE stocks with strict risk-reward ratios.')">
+        <div>
+          <div class="bot-header">
+            <div class="bot-icon-shell"><svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5h16M5 16l5-5 3 2 6-7"/><path d="M15 6h4v4"/></svg></div>
+            <div class="bot-status-pill"><span class="pulse"></span> Online</div>
+          </div>
+          <div class="bot-market-tag">Indian Equities</div>
+          <h3 class="bot-title">Equity Breakout &amp; Swing Bot</h3>
+          <p class="bot-desc">Identifies price action breakouts, volume spikes, moving average crossovers, and swing entry/exit targets.</p>
+        </div>
+        <button class="bot-launch-btn">Chat with Equity Bot ➔</button>
+      </div>
+
+      <!-- Bot 3 -->
+      <div class="bot-card" onclick="launchBotWithPreset('MCX Commodity Desk Bot', 'MCX Commodity setup: Gold, Silver, Crude Oil trends and key intraday pivot levels.')">
+        <div>
+          <div class="bot-header">
+            <div class="bot-icon-shell"><svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v5c0 1.7 3.1 3 7 3 .7 0 1.4 0 2-.1M19 6v4M5 11v5c0 1.7 3.1 3 7 3h1"/><ellipse cx="17" cy="15" rx="4" ry="2"/><path d="M13 15v4c0 1.1 1.8 2 4 2s4-.9 4-2v-4"/></svg></div>
+            <div class="bot-status-pill"><span class="pulse"></span> Online</div>
+          </div>
+          <div class="bot-market-tag">MCX Commodities</div>
+          <h3 class="bot-title">MCX Commodity Desk Bot</h3>
+          <p class="bot-desc">Monitors Gold, Silver, Crude Oil, and Natural Gas tracking global dollar strength and supply-demand data.</p>
+        </div>
+        <button class="bot-launch-btn">Chat with MCX Bot ➔</button>
+      </div>
+
+      <!-- Bot 4 -->
+      <div class="bot-card" onclick="launchBotWithPreset('Crypto & Web3 Intelligence Bot', 'Crypto market analysis: Bitcoin key support, Ethereum momentum, and market cycle phase.')">
+        <div>
+          <div class="bot-header">
+            <div class="bot-icon-shell"><svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
+            <div class="bot-status-pill"><span class="pulse"></span> Online</div>
+          </div>
+          <div class="bot-market-tag">Global Crypto</div>
+          <h3 class="bot-title">Crypto Momentum Bot</h3>
+          <p class="bot-desc">Real-time analysis on Bitcoin, Ethereum, and top altcoins with halving dynamics, dominance, and liquidity levels.</p>
+        </div>
+        <button class="bot-launch-btn">Chat with Crypto Bot ➔</button>
+      </div>
+
+      <!-- Bot 5 -->
+      <div class="bot-card" onclick="launchBotWithPreset('Forex & Macro Analyst Bot', 'Forex analysis: USD/INR currency trend, RBI intervention levels, and interest rate macro triggers.')">
+        <div>
+          <div class="bot-header">
+            <div class="bot-icon-shell"><svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h15l-3-3M20 17H5l3 3"/><path d="M19 7l-3 3M5 17l3-3"/></svg></div>
+            <div class="bot-status-pill"><span class="pulse"></span> Online</div>
+          </div>
+          <div class="bot-market-tag">Forex &amp; Currencies</div>
+          <h3 class="bot-title">Forex &amp; Macro Analyst Bot</h3>
+          <p class="bot-desc">Tracks USD/INR, major currency pairs, central bank interest rate decisions, and geopolitical macro trends.</p>
+        </div>
+        <button class="bot-launch-btn">Chat with Forex Bot ➔</button>
+      </div>
+
+      <!-- Bot 6 -->
+      <div class="bot-card" onclick="launchBotWithPreset('Price Action Coach', 'Explain a classic double-bottom breakout setup in text, including confirmation, invalidation, and risk management.')">
+        <div>
+          <div class="bot-header">
+            <div class="bot-icon-shell"><svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5h16M6 16v-5M11 16V6M16 16V9M21 16V4"/><path d="m5 8 5-3 5 2 5-4"/></svg></div>
+            <div class="bot-status-pill"><span class="pulse"></span> Online</div>
+          </div>
+          <div class="bot-market-tag">Technical Analysis</div>
+          <h3 class="bot-title">Price Action Coach</h3>
+          <p class="bot-desc">Explains candlestick patterns, breakouts, and trading setups in clear text.</p>
+        </div>
+        <button class="bot-launch-btn">Ask about price action ➔</button>
+      </div>
+
+      <!-- Bot 7 -->
+      <div class="bot-card" onclick="launchBotWithPreset('Risk Guard & Sizing Bot', 'How should I calculate position sizing and stop loss for a ₹1,00,000 trading capital account?')">
+        <div>
+          <div class="bot-header">
+            <div class="bot-icon-shell"><svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 20 6v5c0 5-3.4 8.2-8 10-4.6-1.8-8-5-8-10V6l8-3Z"/><path d="m8.5 12 2.3 2.3 4.8-5"/></svg></div>
+            <div class="bot-status-pill"><span class="pulse"></span> Online</div>
+          </div>
+          <div class="bot-market-tag">Capital Protection</div>
+          <h3 class="bot-title">Risk Guard &amp; Sizing Bot</h3>
+          <p class="bot-desc">Calculates strict position sizing, stop-loss ratios, trailing stops, and maximum portfolio drawdown limits.</p>
+        </div>
+        <button class="bot-launch-btn">Calculate Risk ➔</button>
+      </div>
+
+      <!-- Bot 8 -->
+      <div class="bot-card" onclick="launchBotWithPreset('Portfolio & SIP Wealth Bot', 'Create an optimized 10-year monthly SIP allocation across large cap, mid cap, and gold.')">
+        <div>
+          <div class="bot-header">
+            <div class="bot-icon-shell"><svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v9h9"/><path d="M19.5 15A8.5 8.5 0 1 1 9 3.7"/><path d="M16 4h5v5"/></svg></div>
+            <div class="bot-status-pill"><span class="pulse"></span> Online</div>
+          </div>
+          <div class="bot-market-tag">Wealth &amp; Compounding</div>
+          <h3 class="bot-title">Portfolio &amp; SIP Wealth Bot</h3>
+          <p class="bot-desc">Long-term capital compounding models, portfolio rebalancing schedules, and tax-efficient mutual fund roadmaps.</p>
+        </div>
+        <button class="bot-launch-btn">Plan Portfolio ➔</button>
+      </div>
+    </div>
+
+    <!-- Core Platform Highlights Strip -->
+    <div class="features-strip" id="features">
+      <div class="f-strip-card">
+        <h4><span class="feature-icon" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24"><path d="M5 5h14v11H9l-4 3V5Z"/><path d="M8 9h8M8 12h5"/></svg></span> Ultra-Short Answers</h4>
+        <p>Short, direct, and actionable intelligence. No fluff, no essays.</p>
+      </div>
+      <div class="f-strip-card">
+        <h4><span class="feature-icon" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24"><path d="M12 3 20 6v5c0 5-3.4 8.2-8 10-4.6-1.8-8-5-8-10V6l8-3Z"/><path d="m8.5 12 2.3 2.3 4.8-5"/></svg></span> 10 Free Queries/Day</h4>
+        <p>10 queries every single day for free users. Automatically resets every 24 hours.</p>
+      </div>
+      <div class="f-strip-card">
+        <h4><span class="feature-icon" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24"><path d="m4 8 4 3 4-6 4 6 4-3-2 11H6L4 8Z"/><path d="M7 16h10"/></svg></span> Premium Unlimited Plan</h4>
+        <p>₹1,999/month for unlimited Pantomic AI text queries.</p>
+      </div>
+      <div class="f-strip-card">
+        <h4><span class="feature-icon" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 10h6M9 14h4M9 3v3m6-3v3M9 18v3m6-3v3M3 9h3m-3 6h3m12-6h3m-3 6h3"/></svg></span> Pantomic AI Engine</h4>
+        <p>Fast text answers with web search for current news and market updates.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="section-wrap" id="pricing" style="padding-top:20px;">
+    <div class="section-head">
+      <div class="section-tag">Subscription</div>
+      <h2 class="section-title">Straightforward, transparent plans</h2>
+      <p class="section-sub">Start completely free with 10 daily text queries. Upgrade for unlimited high-frequency power.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <!-- Free -->
+      <div class="pricing-card">
+        <div class="pricing-name">Basic Free Plan</div>
+        <div class="pricing-price">₹0 <span>/ month</span></div>
+        <div class="pricing-desc">Perfect for daily stock market lookups, rules, and definitions.</div>
+        <ul class="pricing-list">
+          <li><i>✓</i> <b>10 Text Queries Per Day</b> (Resets daily)</li>
+
+          <li><i>✓</i> Pantomic AI text chat</li>
+          <li><i>✓</i> Access to all 8 Market Bots</li>
+          <li><i>✓</i> Short &amp; To-the-Point Answers</li>
+        </ul>
+        <button class="btn btn-ghost" style="width:100%;padding:12px;" onclick="openSignupModal()">Create Free Account</button>
+      </div>
+
+      <!-- Premium -->
+      <div class="pricing-card popular">
+        <div class="popular-tag">MOST POPULAR</div>
+        <div class="pricing-name" style="color:var(--primary);">Premium Unlimited Plan</div>
+        <div class="pricing-price">₹1,999 <span>/ month</span></div>
+        <div class="pricing-desc">For active traders requiring continuous, unlimited AI intelligence.</div>
+        <ul class="pricing-list">
+          <li><i>✓</i> <b>Unlimited Text Queries</b> (No daily limits)</li>
+          <li><i>✓</i> Pantomic AI text chat</li>
+          <li><i>✓</i> Current market news with web search</li>
+          <li><i>✓</i> Priority Fast Processing</li>
+          <li><i>✓</i> Deep Multi-Leg Strategy Formulations</li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%;padding:12px;" onclick="openUpgradeModal()">Subscribe for ₹1,999/mo</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div>
+      © <span id="yearEl"></span> <b>Pantomic AI</b>. All rights reserved.
+      <span style="display:block;margin-top:4px;font-size:11.5px;">Pantomic provides artificial intelligence market assistance. Nothing constitutes direct financial advice.</span>
+    </div>
+    <div class="footer-links">
+      <a onclick="openSignupModal()">Sign Up</a>
+      <a onclick="openLoginModal()">Login</a>
+      <a onclick="openSettingsModal()"><svg class="line-icon" viewBox="0 0 24 24" aria-hidden="true" style="width:15px;height:15px;display:inline-block;vertical-align:-2px;margin-right:4px;"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.7 2.9-.2-.1a1.7 1.7 0 0 0-1.8.1 1.7 1.7 0 0 0-.9 1.5v.2h-3.4v-.2a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.8-.1l-.2.1-1.7-2.9.1-.1A1.7 1.7 0 0 0 7.5 15a1.7 1.7 0 0 0-1.5-.9h-.2v-3.4H6a1.7 1.7 0 0 0 1.5-.9 1.7 1.7 0 0 0-.1-1.9l-.1-.1L9 4.9l.2.1a1.7 1.7 0 0 0 1.8-.1 1.7 1.7 0 0 0 .9-1.5v-.2h3.4v.2a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8.1l.2-.1 1.7 2.9-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.5.9h.2v3.4H21a1.7 1.7 0 0 0-1.6.9Z"/></svg> Settings</a>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ============================================================
+     2. DEDICATED AI CHATBOT DASHBOARD (#chatApp)
+     ============================================================ -->
+<div id="chatApp">
+
+  <!-- Left Sidebar -->
+  <aside class="chat-sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-logo" onclick="closeChat()">
+        <svg class="panto-svg-logo" width="28" height="28" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="8" width="84" height="84" rx="22" fill="#0F172A" stroke="#1E293B" stroke-width="2.5"/>
+          <path d="M32 72 V28 H54 C62.8366 28 70 35.1634 70 44 C70 52.8366 62.8366 60 54 60 H44 V72 H32 Z" 
+                stroke="#10B981" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="44" cy="44" r="5" fill="#10B981"/>
+          <circle cx="70" cy="44" r="3.5" fill="#06B6D4"/>
+          <line x1="32" y1="44" x2="44" y2="44" stroke="#10B981" stroke-width="4.5" stroke-linecap="round"/>
+        </svg>
+        <span style="font-size:17px;">Pantomic</span>
+      </div>
+      <button class="sidebar-action-btn" title="Back to Homepage" onclick="closeChat()">✕</button>
+    </div>
+
+    <button class="btn-new-chat" onclick="startNewChat()">
+      <span>+</span> New Conversation
+    </button>
+
+    <!-- Usage Tracker -->
+    <div class="usage-box">
+      <div class="usage-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+        <span style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);">Daily Quota</span>
+        <span class="num" id="sideUsageCounter" style="font-size:11.5px;font-weight:700;color:var(--text-main);">0/10 queries</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;margin-bottom:6px;">
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--text-dim);margin-bottom:2px;">
+            <span>Text Queries</span>
+            <span id="sideQueryLabel">0 / 10</span>
+          </div>
+          <div class="progress-track" style="height:4px;">
+            <div class="progress-fill" id="sideProgressFill" style="height:100%;background:linear-gradient(90deg,var(--primary),#6EE7B7);"></div>
+          </div>
+        </div>
+      </div>
+      <div class="usage-note" id="sidePlanNote">Free Plan · Resets daily at midnight</div>
+    </div>
+
+    <!-- User Profile Footer -->
+    <div class="user-footer-card">
+      <div class="user-info">
+        <div class="user-avatar" id="sideUserAvatar">U</div>
+        <div class="user-meta">
+          <div id="sideUserName">User</div>
+          <span id="sideUserPlan">Free Account</span>
+        </div>
+      </div>
+      <div style="display:flex;gap:4px;">
+        <button class="sidebar-action-btn" title="Profile Details" onclick="openProfileModal()">👤</button>
+        <button class="sidebar-action-btn" title="Settings" onclick="openSettingsModal()">⚙</button>
+        <button class="sidebar-action-btn" title="Logout" onclick="handleLogout()">🚪</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Right Main Chat Window -->
+  <main class="chat-main">
+    <!-- Mobile Topbar (shown only on mobile) -->
+    <div class="chat-mobile-topbar">
+      <div class="mobile-brand">
+        <svg width="26" height="26" viewBox="0 0 100 100" fill="none">
+          <rect x="8" y="8" width="84" height="84" rx="22" fill="#0F172A" stroke="#1E293B" stroke-width="2.5"/>
+          <path d="M32 72 V28 H54 C62.8366 28 70 35.1634 70 44 C70 52.8366 62.8366 60 54 60 H44 V72 H32 Z" stroke="#10B981" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="44" cy="44" r="5" fill="#10B981"/>
+        </svg>
+        <span>Pantomic AI</span>
+        <span id="mobileTopbarBadge" style="font-size:10px;font-weight:700;background:rgba(16,185,129,0.12);color:var(--primary);border:1px solid rgba(16,185,129,0.25);padding:2px 7px;border-radius:5px;">FREE</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button class="btn-mobile-menu" onclick="openMobileSheet()">☰ Menu</button>
+        <button class="btn btn-gold" style="padding:6px 10px;font-size:11px;" onclick="openUpgradeModal()">👑 Upgrade</button>
+      </div>
+    </div>
+
+    <!-- Topbar -->
+    <div class="chat-topbar">
+      <div class="chat-model-indicator">
+        <img src="pantomic_logo.svg" alt="Pantomic logo" width="28" height="28" style="display:block;object-fit:contain;">
+        <span id="topbarBrandName">Pantomic</span>
+        <span class="badge" id="topbarPlanBadge">Free Plan</span>
+      </div>
+      <div class="chat-topbar-actions">
+        <button class="btn btn-gold" id="topbarUpgradeBtn" style="padding:7px 14px;font-size:12px;" onclick="openUpgradeModal()">
+          👑 Upgrade to Premium (₹1,999/mo)
+        </button>
+        <button class="btn btn-ghost" style="padding:7px 12px;font-size:12px;" onclick="closeChat()">
+          Exit to Home
+        </button>
+      </div>
+    </div>
+
+    <!-- Message Stream (Flex child, scrolls smoothly without dock overlap) -->
+    <div class="chat-stream" id="chatStream">
+      <div class="stream-inner" id="streamInner">
+        <div class="chat-hero-empty" id="emptyStateHero">
+          <h2>What can Pantomic answer today?</h2>
+          <p>Ask a market question, strategy rule, or request a text explanation of a chart pattern.</p>
+          <div class="quick-chips">
+            <div class="quick-chip" onclick="fillPrompt('Nifty me support aur resistance kaise identify kare?')">Nifty me support &amp; resistance kaise identify kare?</div>
+            <div class="quick-chip" onclick="fillPrompt('Give me today’s Nifty, Sensex, and Bank Nifty market update with source timestamps and clickable sources. Clearly label any delayed data.')">📈 Today’s Indian market update</div>
+            <div class="quick-chip" onclick="fillPrompt('What are the latest Indian market headlines from today? Summarize likely impact and cite source links.')">📰 Latest market news</div>
+            <div class="quick-chip" onclick="fillPrompt('What is a bull market?')">What is a bull market?</div>
+            <div class="quick-chip" onclick="fillPrompt('Golden rules of options trading')">Golden rules of options trading</div>
+            <div class="quick-chip" onclick="fillPrompt('Explain a bullish candlestick breakout setup, its confirmation, invalidation, and risk management.')">Explain a bullish breakout setup</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Input Dock (Fixed at bottom via Flex flow, never covers chat) -->
+    <div class="input-dock">
+      <div class="input-box">
+        <div class="input-row">
+          <textarea id="promptInput" rows="1" placeholder="Ask anything about markets..." onkeydown="handleInputKey(event)" oninput="autoExpandTextarea(this)"></textarea>
+          <button class="btn-send" id="btnSend" onclick="executeSend()" title="Send query">➤</button>
+        </div>
+        <div class="input-controls">
+          <div class="input-tools">
+            <!-- Desktop / Laptop View: Direct buttons, NO DROPDOWN -->
+            <div class="input-tools-desktop">
+              <button type="button" class="tool-pill btn-voice-mic-action" id="btnVoiceMic" onclick="toggleVoiceSpeechInput()" title="Speak your question">
+                <span>🎙</span> Voice
+              </button>
+              <button type="button" class="tool-pill" onclick="handleBotItemClick('Image Upload', 'Analyze this chart pattern for key levels and trend structure.')" title="Chart pattern & snapshot analysis">
+                <span>🔒</span> Image Upload
+              </button>
+              <button type="button" class="tool-pill" onclick="handleBotItemClick('Scalping Bot', 'Nifty & BankNifty scalp setup with highest OI strikes and support levels.')" title="Nifty & BankNifty F&O Scalper">
+                <span>🔒</span> Scalping Bot
+              </button>
+              <button type="button" class="tool-pill" onclick="handleBotItemClick('Index Bot', 'Index breakout setups and daily trend momentum.')" title="NSE & BSE Derivatives Desk">
+                <span>🔒</span> Index Bot
+              </button>
+              <button type="button" class="tool-pill" onclick="handleBotItemClick('Crypto Bot', 'Crypto market analysis: Bitcoin key support and momentum.')" title="BTC, ETH & Web3 momentum">
+                <span>🔒</span> Crypto Bot
+              </button>
+              <button type="button" class="tool-pill" onclick="handleBotItemClick('Forex Bot', 'Forex analysis: USD/INR currency trend and RBI triggers.')" title="Macro currencies & USD/INR">
+                <span>🔒</span> Forex Bot
+              </button>
+              <button type="button" class="tool-pill" onclick="handleBotItemClick('Volume Finder Bot', 'Scan high-volume breakout stocks with accumulation patterns.')" title="Unusual volume & block deals">
+                <span>🔒</span> Volume Finder Bot
+              </button>
+              <button type="button" class="tool-pill" onclick="handleBotItemClick('Price Action Bot', 'Explain candlestick setups and support/resistance breakout.')" title="Pure price action & candlestick coach">
+                <span>🔒</span> Price Action Bot
+              </button>
+            </div>
+
+            <!-- Mobile View: Upward dropdown containing all bots + voice -->
+            <div class="input-tools-mobile">
+              <button type="button" class="tool-pill btn-voice-mic-action" id="btnVoiceMicMobile" onclick="toggleVoiceSpeechInput()" title="Speak your question">
+                <span>🎙</span> Voice
+              </button>
+              <div class="bot-tools-dropdown-container">
+                <button type="button" class="tool-pill bot-dropdown-btn" id="btnBotToolsDropdown" onclick="toggleBotToolsDropdown(event)" title="AI Trading Bots">
+                  <span>🔒</span> AI Bots ▾
+                </button>
+                <div class="bot-tools-menu" id="botToolsMenu">
+                  <div class="bot-menu-header">
+                    <span>AI Trading Desks</span>
+                    <span class="badge-lock">👑 Premium Pass</span>
+                  </div>
+                  <div class="bot-menu-item" onclick="handleVoiceDropdownClick()">
+                    <span class="item-icon">🎙</span>
+                    <div class="item-text">
+                      <div class="item-title">Voice Input</div>
+                      <div class="item-desc">Speak your question directly</div>
+                    </div>
+                    <span class="lock-tag" style="background:rgba(16,185,129,0.15);color:var(--primary);border-color:rgba(16,185,129,0.3);">FREE</span>
+                  </div>
+                  <div class="bot-menu-item" onclick="handleBotItemClick('Image Upload', 'Analyze this chart pattern for key levels and trend structure.')">
+                    <span class="item-icon">🔒</span>
+                    <div class="item-text">
+                      <div class="item-title">Image Upload</div>
+                      <div class="item-desc">Chart pattern &amp; snapshot analysis</div>
+                    </div>
+                    <span class="lock-tag">PRO</span>
+                  </div>
+                  <div class="bot-menu-item" onclick="handleBotItemClick('Scalping Bot', 'Nifty & BankNifty scalp setup with highest OI strikes and support levels.')">
+                    <span class="item-icon">🔒</span>
+                    <div class="item-text">
+                      <div class="item-title">Scalping Bot</div>
+                      <div class="item-desc">Nifty &amp; BankNifty F&amp;O Scalper</div>
+                    </div>
+                    <span class="lock-tag">PRO</span>
+                  </div>
+                  <div class="bot-menu-item" onclick="handleBotItemClick('Index Bot', 'Index breakout setups and daily trend momentum.')">
+                    <span class="item-icon">🔒</span>
+                    <div class="item-text">
+                      <div class="item-title">Index Bot</div>
+                      <div class="item-desc">NSE &amp; BSE Derivatives Desk</div>
+                    </div>
+                    <span class="lock-tag">PRO</span>
+                  </div>
+                  <div class="bot-menu-item" onclick="handleBotItemClick('Crypto Bot', 'Crypto market analysis: Bitcoin key support and momentum.')">
+                    <span class="item-icon">🔒</span>
+                    <div class="item-text">
+                      <div class="item-title">Crypto Bot</div>
+                      <div class="item-desc">BTC, ETH &amp; Web3 momentum</div>
+                    </div>
+                    <span class="lock-tag">PRO</span>
+                  </div>
+                  <div class="bot-menu-item" onclick="handleBotItemClick('Forex Bot', 'Forex analysis: USD/INR currency trend and RBI triggers.')">
+                    <span class="item-icon">🔒</span>
+                    <div class="item-text">
+                      <div class="item-title">Forex Bot</div>
+                      <div class="item-desc">Macro currencies &amp; USD/INR</div>
+                    </div>
+                    <span class="lock-tag">PRO</span>
+                  </div>
+                  <div class="bot-menu-item" onclick="handleBotItemClick('Volume Finder Bot', 'Scan high-volume breakout stocks with accumulation patterns.')">
+                    <span class="item-icon">🔒</span>
+                    <div class="item-text">
+                      <div class="item-title">Volume Finder Bot</div>
+                      <div class="item-desc">Unusual volume &amp; block deals</div>
+                    </div>
+                    <span class="lock-tag">PRO</span>
+                  </div>
+                  <div class="bot-menu-item" onclick="handleBotItemClick('Price Action Bot', 'Explain candlestick setups and support/resistance breakout.')">
+                    <span class="item-icon">🔒</span>
+                    <div class="item-text">
+                      <div class="item-title">Price Action Bot</div>
+                      <div class="item-desc">Pure price action &amp; candlestick coach</div>
+                    </div>
+                    <span class="lock-tag">PRO</span>
+                  </div>
+                  <div class="bot-menu-footer" onclick="openUpgradeModal('Subscribe to Premium (₹1,999/mo) to unlock all specialized trading bots.')">
+                    👑 Upgrade to Unlock All (₹1,999/mo)
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <span style="font-size:11px;color:var(--text-dim);" id="shortcutHint">Press Enter to send</span>
+        </div>
+      </div>
+      <div class="dock-disclaimer">Pantomic AI can make mistakes. Please verify critical financial information.</div>
+    </div>
+  </main>
+
+</div>
+
+<!-- ====== MOBILE CHAT BOTTOM SHEET SIDEBAR ====== -->
+<div class="chat-sidebar-overlay" id="chatSidebarOverlay" onclick="closeMobileSheet()"></div>
+<div class="chat-sidebar-sheet" id="chatSidebarSheet">
+  <div class="sheet-handle"></div>
+  <div class="sheet-user-info">
+    <div class="sheet-avatar" id="sheetUserAvatar">U</div>
+    <div class="sheet-user-meta">
+      <div class="name" id="sheetUserName">User</div>
+      <div class="plan" id="sheetUserPlan">Free Account</div>
+    </div>
+  </div>
+  <div class="sheet-actions">
+    <button class="sheet-action-btn gold-btn" onclick="closeMobileSheet(); openUpgradeModal();">👑 Upgrade to Premium ₹1,999/mo</button>
+    <button class="sheet-action-btn" onclick="startNewChat(); closeMobileSheet();">✚ New Conversation</button>
+    <button class="sheet-action-btn" onclick="closeMobileSheet(); openProfileModal();">👤 My Profile</button>
+    <button class="sheet-action-btn" onclick="closeMobileSheet(); openSettingsModal();">⚙️ Settings</button>
+    <button class="sheet-action-btn" onclick="closeMobileSheet(); closeChat();">🏠 Exit to Homepage</button>
+    <button class="sheet-action-btn danger" onclick="closeMobileSheet(); handleLogout();">🚪 Logout</button>
+  </div>
+</div>
+
+<!-- ============================================================
+     3. AUTH & ACTION MODALS
+     ============================================================ -->
+
+<!-- SIGNUP MODAL -->
+<div class="modal-overlay" id="signupModal">
+  <div class="modal-window">
+    <button class="modal-close" onclick="closeSignupModal()">✕</button>
+    <div class="modal-icon">
+      <svg width="44" height="44" viewBox="0 0 100 100" fill="none">
+        <rect x="8" y="8" width="84" height="84" rx="22" fill="#0F172A" stroke="#1E293B" stroke-width="2.5"/>
+        <path d="M32 72 V28 H54 C62.8366 28 70 35.1634 70 44 C70 52.8366 62.8366 60 54 60 H44 V72 H32 Z" 
+              stroke="#10B981" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="44" cy="44" r="5" fill="#10B981"/>
+        <circle cx="70" cy="44" r="3.5" fill="#06B6D4"/>
+      </svg>
+    </div>
+    <h2 class="modal-title">Create your account</h2>
+    <p class="modal-sub">Sign up to get 10 free AI queries every day on Pantomic.</p>
+
+    <form id="signupForm" onsubmit="processSignup(event)">
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" class="form-input" id="suName" placeholder="Rahul Sharma" required>
+      </div>
+
+      <div class="form-group">
+        <label>Email ID *</label>
+        <input type="email" class="form-input" id="suEmail" placeholder="rahul@gmail.com" required>
+      </div>
+
+      <div class="form-group">
+        <label>Mobile Number *</label>
+        <input type="tel" class="form-input" id="suMobile" placeholder="9876543210" pattern="[0-9]{10}" maxlength="10" required>
+      </div>
+
+      <div class="form-group">
+        <label>Password *</label>
+        <input type="password" class="form-input" id="suPassword" placeholder="Create a password" required minlength="4">
+      </div>
+
+      <div class="form-group">
+        <label>Select Markets of Interest *</label>
+        <div class="market-checkboxes">
+          <label class="market-chk-label">
+            <input type="checkbox" name="suMarket" value="NSE & BSE Equities" checked> NSE &amp; BSE
+          </label>
+          <label class="market-chk-label">
+            <input type="checkbox" name="suMarket" value="F&O Derivatives" checked> F&amp;O Options
+          </label>
+          <label class="market-chk-label">
+            <input type="checkbox" name="suMarket" value="MCX Commodities" checked> MCX Commodities
+          </label>
+          <label class="market-chk-label">
+            <input type="checkbox" name="suMarket" value="Crypto & Forex"> Crypto &amp; Forex
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" class="form-submit" id="btnSignupSubmit">Create Account &amp; Start Chatting</button>
+    </form>
+
+    <div class="modal-foot-link">
+      Already have an account? <a onclick="switchToLogin()">Log In</a>
+    </div>
+  </div>
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal-window">
+    <button class="modal-close" onclick="closeLoginModal()">✕</button>
+    <div class="modal-icon">
+      <svg width="44" height="44" viewBox="0 0 100 100" fill="none">
+        <rect x="8" y="8" width="84" height="84" rx="22" fill="#0F172A" stroke="#1E293B" stroke-width="2.5"/>
+        <path d="M32 72 V28 H54 C62.8366 28 70 35.1634 70 44 C70 52.8366 62.8366 60 54 60 H44 V72 H32 Z" 
+              stroke="#10B981" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="44" cy="44" r="5" fill="#10B981"/>
+        <circle cx="70" cy="44" r="3.5" fill="#06B6D4"/>
+      </svg>
+    </div>
+    <h2 class="modal-title">Welcome back</h2>
+    <p class="modal-sub">Log in with your Mobile Number and Password.</p>
+
+    <form id="loginForm" onsubmit="processLogin(event)">
+      <div class="form-group">
+        <label>Mobile Number</label>
+        <input type="tel" class="form-input" id="loginMobile" placeholder="9876543210" pattern="[0-9]{10}" maxlength="10" required>
+      </div>
+
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-input" id="loginPassword" placeholder="Enter password" required>
+      </div>
+
+      <button type="submit" class="form-submit">Log In to Pantomic</button>
+    </form>
+
+    <div class="modal-foot-link">
+      Don't have an account? <a onclick="switchToSignup()">Create Free Account</a>
+    </div>
+  </div>
+</div>
+
+<!-- PROFILE MODAL -->
+<div class="modal-overlay" id="profileModal">
+  <div class="modal-window">
+    <button class="modal-close" onclick="closeProfileModal()">✕</button>
+    <div class="modal-icon">👤</div>
+    <h2 class="modal-title">User Profile</h2>
+    <p class="modal-sub">Account specifications and usage analytics.</p>
+
+    <div class="profile-list">
+      <div class="profile-item"><span class="lbl">User ID:</span><span class="val" id="pProfId">-</span></div>
+      <div class="profile-item"><span class="lbl">Name:</span><span class="val" id="pProfName">-</span></div>
+      <div class="profile-item"><span class="lbl">Email:</span><span class="val" id="pProfEmail">-</span></div>
+      <div class="profile-item"><span class="lbl">Mobile:</span><span class="val" id="pProfMobile">-</span></div>
+      <div class="profile-item"><span class="lbl">Selected Markets:</span><span class="val" id="pProfMarkets">-</span></div>
+      <div class="profile-item"><span class="lbl">Plan:</span><span class="val" id="pProfPlan">-</span></div>
+      <div class="profile-item"><span class="lbl">Today's Queries:</span><span class="val" id="pProfUsage">-</span></div>
+      <div class="profile-item"><span class="lbl">Joined On:</span><span class="val" id="pProfDate">-</span></div>
+    </div>
+
+    <div style="display:flex;gap:10px;">
+      <button class="btn btn-gold" style="flex:1;padding:12px;" onclick="closeProfileModal(); openUpgradeModal();">Upgrade to Premium</button>
+      <button class="btn btn-ghost" style="padding:12px;" onclick="closeProfileModal(); handleLogout();">Logout</button>
+    </div>
+  </div>
+</div>
+
+<!-- UPGRADE MODAL -->
+<div class="modal-overlay" id="upgradeModal">
+  <div class="modal-window">
+    <button class="modal-close" onclick="closeUpgradeModal()">✕</button>
+    <div class="modal-icon" style="background:linear-gradient(135deg,var(--gold),#D97706);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;">👑</div>
+    <h2 class="modal-title">Upgrade to Premium</h2>
+    <p class="modal-sub">Unlock unlimited daily Pantomic AI text queries.</p>
+
+    <div style="background:rgba(245, 158, 11, 0.1);border:1px solid rgba(245, 158, 11, 0.3);padding:16px;border-radius:12px;text-align:center;margin-bottom:18px;">
+      <div style="font-size:11px;color:var(--gold);font-weight:700;text-transform:uppercase;">Monthly Subscription</div>
+      <div style="font-size:34px;font-weight:800;color:var(--text);margin:4px 0;">₹1,999 <span style="font-size:14px;color:var(--text-muted);font-weight:500;">/ month</span></div>
+      <div style="font-size:12px;color:var(--text-muted);">Instant Unlock · No Daily Limits</div>
+    </div>
+
+    <ul class="pricing-list" style="margin-bottom:20px;">
+      <li><i>✓</i> <b>Unlimited Text Queries</b> (No daily limits)</li>
+      <li><i>✓</i> Pantomic AI text chat</li>
+      <li><i>✓</i> Current market news with web search</li>
+
+      <li><i>✓</i> Priority Response Processing</li>
+      <li><i>✓</i> All Market Insights (NSE/BSE, MCX, Crypto, Forex)</li>
+    </ul>
+
+    <button class="btn btn-gold" style="width:100%;padding:14px;font-size:14px;" onclick="executePremiumUpgrade()">
+      Activate Premium Plan (₹1,999/mo)
+    </button>
+  </div>
+</div>
+
+<!-- SETTINGS MODAL -->
+<div class="modal-overlay" id="settingsModal">
+  <div class="modal-window" style="max-width:520px;">
+    <button class="modal-close" onclick="closeSettingsModal()">✕</button>
+    <div class="modal-icon" style="background:var(--bg-card);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;">⚙</div>
+    <h2 class="modal-title">Platform Configuration</h2>
+    <p class="modal-sub">AI requests run securely through the server. This page never stores API keys.</p>
+
+    <div class="form-group">
+      <label>Secure AI Connection</label>
+      <span style="font-size:12px;color:var(--text-muted);display:block;line-height:1.5;">
+        The AI service key is configured on the server and is never stored in this browser. It enables Pantomic AI text replies and web search.
+      </span>
+    </div>
+
+    <!-- Active Engine Status -->
+    <div style="margin-top:16px;background:var(--bg-card);padding:14px;border-radius:8px;border:1px solid var(--border);font-size:12px;">
+      <div style="font-weight:700;color:var(--text);margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+        <span style="color:#10B981;">●</span> Pantomic AI Capabilities
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;color:var(--text-muted);font-family:var(--mono);line-height:1.5;">
+        <div>• <b style="color:var(--text);">Pantomic AI:</b> Text conversation and market explanations</div>
+        <div>• <b style="color:var(--text);">Pantomic Search:</b> Current web results with clickable sources</div>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:10px;margin-top:20px;">
+      <button class="btn btn-primary" style="flex:1;padding:12px;" onclick="closeSettingsModal()">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================
+     4. JAVASCRIPT ENGINE (TEXT CHAT, WEB SEARCH, VOICE)
+     ============================================================ -->
+<script>
+  document.getElementById('yearEl').textContent = new Date().getFullYear();
+
+  /* ========== MOBILE NAV DRAWER ========== */
+  function toggleMobileNav() {
+    const btn = document.getElementById('hamburgerBtn');
+    const drawer = document.getElementById('mobileNavDrawer');
+    const isOpen = drawer.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+
+  /* ========== MOBILE CHAT BOTTOM SHEET ========== */
+  function openMobileSheet() {
+    const user = JSON.parse(localStorage.getItem('pantomic_user') || '{}');
+    const el = (id, val) => { const e = document.getElementById(id); if (e) e.textContent = val; };
+    el('sheetUserName', user.name || 'User');
+    el('sheetUserAvatar', (user.name || 'U').charAt(0).toUpperCase());
+    el('sheetUserPlan', user.plan === 'premium' ? '👑 Premium Plan' : 'Free Account');
+    document.getElementById('chatSidebarOverlay').classList.add('open');
+    document.getElementById('chatSidebarSheet').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileSheet() {
+    document.getElementById('chatSidebarOverlay').classList.remove('open');
+    document.getElementById('chatSidebarSheet').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  /* ========== INPUT DOCK BOTS & TOOLS DROPDOWN ========== */
+  function toggleBotToolsDropdown(event) {
+    if (event) event.stopPropagation();
+    const menu = document.getElementById('botToolsMenu');
+    if (!menu) return;
+    menu.classList.toggle('open');
+  }
+
+  function closeBotToolsDropdown() {
+    const menu = document.getElementById('botToolsMenu');
+    if (menu) menu.classList.remove('open');
+  }
+
+  function handleBotItemClick(botName, presetPrompt) {
+    closeBotToolsDropdown();
+    const user = getActiveUser();
+    if (!user || user.plan !== "premium") {
+      showPaidBotUpgrade(botName);
+      return;
+    }
+    launchBotWithPreset(botName, presetPrompt);
+  }
+
+  // Close bot tools dropdown when clicking outside
+  document.addEventListener('click', function(e) {
+    const dropdown = document.querySelector('.bot-tools-dropdown-container');
+    if (dropdown && !dropdown.contains(e.target)) {
+      closeBotToolsDropdown();
+    }
+  });
+
+  async function requestAI(endpoint, payload, signal) {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      ...(signal ? { signal } : {})
+    });
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      const error = new Error(data.error || `AI request failed (${response.status}).`);
+      error.payload = data;
+      throw error;
+    }
+    return data;
+  }
+
+  // Purge any legacy keys from previous sessions
+  try {
+    localStorage.removeItem("pantomic_v3_gemini_key");
+    localStorage.removeItem("pantomic_v3_openai_key");
+  } catch(_) {}
+
+  const STORAGE_USERS = "pantomic_v3_users";
+  const STORAGE_SESSION = "pantomic_v3_session";
+  let activeSpeechUtterance = null;
+  let conversationSession = []; // Multi-turn chat memory in active session
+
+  // Seed demo account
+  function seedDatabase() {
+    if (!localStorage.getItem(STORAGE_USERS)) {
+      const demoUsers = [
+        {
+          id: "PANTO-1001",
+          name: "Rahul Sharma",
+          email: "rahul@gmail.com",
+          mobile: "9876543210",
+          password: "password123",
+          markets: "NSE & BSE Equities, F&O Derivatives",
+          signupDate: "05/10/2026",
+          plan: "Free"
+        }
+      ];
+      localStorage.setItem(STORAGE_USERS, JSON.stringify(demoUsers));
+    }
+  }
+  seedDatabase();
+
+  function getStoredUsers() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_USERS)) || []; } catch(e) { return []; }
+  }
+  function saveStoredUsers(arr) { localStorage.setItem(STORAGE_USERS, JSON.stringify(arr)); }
+  function getActiveUser() { try { return JSON.parse(localStorage.getItem(STORAGE_SESSION)); } catch(e) { return null; } }
+  function setActiveUser(user) {
+    if (user) localStorage.setItem(STORAGE_SESSION, JSON.stringify(user));
+    else localStorage.removeItem(STORAGE_SESSION);
+    refreshAppState();
+  }
+
+  // Free accounts receive 10 text queries per day; Premium accounts have unlimited queries.
+  const DAILY_QUERY_LIMIT = 10;
+
+  function getTodayKey() {
+    const parts = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit'
+    }).formatToParts(new Date());
+    const values = Object.fromEntries(parts.map(part => [part.type, part.value]));
+    return `${values.year}-${values.month}-${values.day}`;
+  }
+
+  function getUserUsage(userId) {
+    if (!userId) return { queries: 0 };
+    const key = `pantomic_usage_${userId}`;
+    try {
+      const data = JSON.parse(localStorage.getItem(key));
+      if (data && data.date === getTodayKey()) {
+        const queries = typeof data.queries === 'number' ? data.queries : (typeof data.count === 'number' ? data.count : 0);
+        return { queries };
+      }
+      return { queries: 0 };
+    } catch (e) { return { queries: 0 }; }
+  }
+
+  function getUserQueryCount(userId) {
+    return getUserUsage(userId).queries;
+  }
+
+  function saveUserQueryCount(userId, queries) {
+    if (!userId || !Number.isFinite(queries)) return;
+    const key = `pantomic_usage_${userId}`;
+    localStorage.setItem(key, JSON.stringify({ date: getTodayKey(), queries, count: queries }));
+  }
+
+  function recordUserQuery(userId) {
+    if (!userId) return 1;
+    const queries = getUserQueryCount(userId) + 1;
+    saveUserQueryCount(userId, queries);
+    return queries;
+  }
+  // Refresh App UI State
+  function refreshAppState() {
+    const user = getActiveUser();
+    const navAuth = document.getElementById('navAuthActions');
+
+    if (user) {
+      const isPremium = user.plan && user.plan.toLowerCase() === 'premium';
+      const usage = getUserUsage(user.id);
+      const todayQueries = usage.queries;
+
+
+      if (navAuth) {
+        navAuth.innerHTML = `
+          <button class="btn btn-ghost" onclick="launchChat()">Open Chat</button>
+          <button class="btn btn-primary" onclick="openProfileModal()">👤 ${escapeHtml(user.name.split(' ')[0])}</button>
+        `;
+      }
+
+      const sideName = document.getElementById('sideUserName');
+      const sideAvatar = document.getElementById('sideUserAvatar');
+      const sidePlan = document.getElementById('sideUserPlan');
+      const sideCounter = document.getElementById('sideUsageCounter');
+      const sideProgress = document.getElementById('sideProgressFill');
+
+      const sideQueryLabel = document.getElementById('sideQueryLabel');
+
+      const sideNote = document.getElementById('sidePlanNote');
+
+      if (sideName) sideName.textContent = user.name;
+      if (sideAvatar) sideAvatar.textContent = user.name.charAt(0).toUpperCase();
+      if (sidePlan) sidePlan.textContent = isPremium ? 'Premium Plan 👑' : 'Free Plan';
+
+      if (sideCounter && sideNote) {
+        if (isPremium) {
+          sideCounter.textContent = 'Unlimited';
+          if (sideProgress) sideProgress.style.width = '100%';
+
+          if (sideQueryLabel) sideQueryLabel.textContent = 'Unlimited';
+
+          sideNote.textContent = '👑 Premium Member · Unlimited Queries';
+        } else {
+          sideCounter.textContent = `${todayQueries} / ${DAILY_QUERY_LIMIT} queries`;
+          const qPct = Math.min((todayQueries / DAILY_QUERY_LIMIT) * 100, 100);
+          if (sideProgress) sideProgress.style.width = `${qPct}%`;
+          if (sideQueryLabel) sideQueryLabel.textContent = `${todayQueries} / ${DAILY_QUERY_LIMIT}`;
+          sideNote.textContent = 'Free Plan · Resets daily at midnight';
+        }
+      }
+
+      const topbarPlan = document.getElementById('topbarPlanBadge');
+      const topbarUpgrade = document.getElementById('topbarUpgradeBtn');
+      if (topbarPlan) topbarPlan.textContent = isPremium ? 'Premium Plan' : 'Free Plan';
+      if (topbarUpgrade) topbarUpgrade.style.display = isPremium ? 'none' : 'inline-flex';
+
+
+
+
+    } else {
+      if (navAuth) {
+        navAuth.innerHTML = `
+          <button class="btn btn-ghost" onclick="openLoginModal()">Log In</button>
+          <button class="btn btn-primary" onclick="openSignupModal()">Create Free Account</button>
+        `;
+      }
+    }
+  }
+
+  function smoothScroll(e, id) {
+    if (e) e.preventDefault();
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function handleHeroStart() {
+    const user = getActiveUser();
+    if (user) launchChat();
+    else openSignupModal();
+  }
+
+  function launchBotWithPreset(botTitle, promptExample) {
+    const user = getActiveUser();
+    if (!user) {
+      openSignupModal();
+      return;
+    }
+    launchChat();
+    fillPrompt(promptExample);
+  }
+
+  function launchChat() {
+    const user = getActiveUser();
+    if (!user) {
+      openLoginModal();
+      return;
+    }
+    document.getElementById('landingPage').style.display = 'none';
+    document.getElementById('chatApp').style.display = 'grid';
+    refreshAppState();
+    scrollToChatBottom(false);
+    setTimeout(() => {
+      const inp = document.getElementById('promptInput');
+      if (inp) inp.focus();
+    }, 100);
+  }
+
+  function closeChat() {
+    if (speechSynthesis.speaking) speechSynthesis.cancel();
+    document.getElementById('chatApp').style.display = 'none';
+    document.getElementById('landingPage').style.display = 'flex';
+    refreshAppState();
+  }
+
+  // ==============================================================
+  // USER SIGNUP & LOGIN FLOW
+  // ==============================================================
+  function openSignupModal() { document.getElementById('signupModal').classList.add('active'); }
+  function closeSignupModal() { document.getElementById('signupModal').classList.remove('active'); }
+  function openLoginModal() { document.getElementById('loginModal').classList.add('active'); }
+  function closeLoginModal() { document.getElementById('loginModal').classList.remove('active'); }
+
+  function switchToLogin() { closeSignupModal(); openLoginModal(); }
+  function switchToSignup() { closeLoginModal(); openSignupModal(); }
+
+  async function processSignup(e) {
+    e.preventDefault();
+    const name = document.getElementById('suName').value.trim();
+    const email = document.getElementById('suEmail').value.trim();
+    const mobile = document.getElementById('suMobile').value.trim();
+    const password = document.getElementById('suPassword').value;
+
+    const checkedBoxes = document.querySelectorAll('input[name="suMarket"]:checked');
+    const markets = Array.from(checkedBoxes).map(c => c.value).join(', ') || "All Markets";
+
+    if (!name || !email || !mobile || !password) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
+    const users = getStoredUsers();
+    if (users.find(u => u.mobile === mobile)) {
+      alert("An account with this mobile number already exists. Please log in.");
+      switchToLogin();
+      return;
+    }
+
+    const now = new Date();
+    const dd = String(now.getDate()).padStart(2, '0');
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const yyyy = now.getFullYear();
+    const signupDate = `${dd}/${mm}/${yyyy}`;
+
+    const newUserId = "PANTO-" + Math.floor(10000 + Math.random() * 90000);
+
+    const newUser = {
+      id: newUserId,
+      name: name,
+      email: email,
+      mobile: mobile,
+      password: password, // Plain text as requested
+      markets: markets,
+      signupDate: signupDate,
+      plan: "Free"
+    };
+
+    const btnSubmit = document.getElementById('btnSignupSubmit');
+    const originalBtnText = btnSubmit ? btnSubmit.textContent : "Create Account & Start Chatting";
+    if (btnSubmit) {
+      btnSubmit.disabled = true;
+      btnSubmit.textContent = "Syncing with Google Sheets...";
+    }
+
+    const GOOGLE_SHEETS_WEBHOOK = "https://script.google.com/macros/s/AKfycby7p4KvsL-t6jqTuV6bIg9f4ntXdfWIJBIJvVxhYmWjr_DCDkNeqiWDOjp9YiAzy8U/exec";
+    const payload = {
+      userId: newUser.id,
+      name: newUser.name,
+      email: newUser.email,
+      mobile: newUser.mobile,
+      password: newUser.password,
+      markets: newUser.markets,
+      signupDate: newUser.signupDate,
+      plan: newUser.plan
+    };
+
+    let synced = false;
+
+    // 1. Try local server endpoint first
+    try {
+      const res = await fetch("/api/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      if (res.ok) {
+        synced = true;
+      }
+    } catch (_) {
+      // Backend not running or unreachable from mobile/cross-origin
+    }
+
+    // 2. Direct fallback to Google Sheets Webhook (ensures mobile, Live Server, and static files sync 100%)
+    if (!synced) {
+      try {
+        await fetch(GOOGLE_SHEETS_WEBHOOK, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        });
+        synced = true;
+      } catch (directErr) {
+        console.warn("Direct Google Sheets sync warning:", directErr);
+      }
+    }
+
+    if (btnSubmit) {
+      btnSubmit.disabled = false;
+      btnSubmit.textContent = originalBtnText;
+    }
+
+    users.push(newUser);
+    saveStoredUsers(users);
+
+    setActiveUser(newUser);
+    closeSignupModal();
+    launchChat();
+  }
+
+  function processLogin(e) {
+    e.preventDefault();
+    const mobile = document.getElementById('loginMobile').value.trim();
+    const password = document.getElementById('loginPassword').value;
+
+    const users = getStoredUsers();
+    const found = users.find(u => u.mobile === mobile && u.password === password);
+
+    if (found) {
+      setActiveUser(found);
+      closeLoginModal();
+      launchChat();
+    } else {
+      alert("Invalid Mobile Number or Password. Please check your credentials.");
+    }
+  }
+
+  function handleLogout() {
+    if (speechSynthesis.speaking) speechSynthesis.cancel();
+    setActiveUser(null);
+    closeChat();
+    alert("You have been successfully logged out.");
+  }
+
+  // Profile & Upgrade
+  function openProfileModal() {
+    const user = getActiveUser();
+    if (!user) { openLoginModal(); return; }
+
+    const isPremium = user.plan && user.plan.toLowerCase() === 'premium';
+    const usage = getUserUsage(user.id);
+
+    document.getElementById('pProfId').textContent = user.id;
+    document.getElementById('pProfName').textContent = user.name;
+    document.getElementById('pProfEmail').textContent = user.email;
+    document.getElementById('pProfMobile').textContent = user.mobile;
+    document.getElementById('pProfMarkets').textContent = user.markets;
+    document.getElementById('pProfPlan').textContent = isPremium ? "Premium Plan 👑" : "Free Plan";
+    document.getElementById('pProfUsage').textContent = isPremium ? "Unlimited" : `${usage.queries} / 10 queries today`;
+    document.getElementById('pProfDate').textContent = user.signupDate;
+
+    document.getElementById('profileModal').classList.add('active');
+  }
+  function closeProfileModal() { document.getElementById('profileModal').classList.remove('active'); }
+
+  function openUpgradeModal(message = "") {
+    const note = document.querySelector('#upgradeModal .modal-sub');
+    if (note) note.textContent = message || 'Unlock unlimited daily Pantomic AI text queries.';
+    document.getElementById('upgradeModal').classList.add('active');
+  }
+  function showPaidBotUpgrade(botName) {
+    openUpgradeModal(`${botName} is available with the Premium subscription. Upgrade to use this bot.`);
+  }
+  function closeUpgradeModal() { document.getElementById('upgradeModal').classList.remove('active'); }
+
+  function executePremiumUpgrade() {
+    const user = getActiveUser();
+    if (!user) {
+      closeUpgradeModal();
+      openLoginModal();
+      return;
+    }
+
+    user.plan = 'Premium';
+    setActiveUser(user);
+
+    const users = getStoredUsers();
+    const idx = users.findIndex(u => u.id === user.id);
+    if (idx !== -1) {
+      users[idx].plan = 'Premium';
+      saveStoredUsers(users);
+    }
+
+    closeUpgradeModal();
+
+
+    appendBotMessage(`
+      <div style="background:rgba(245, 158, 11, 0.1);border:1px solid rgba(245, 158, 11, 0.3);padding:14px;border-radius:10px;color:#FDE68A;">
+        👑 <b>Premium Plan Activated!</b><br>
+        Your ₹1,999/month subscription is now active. You have <b>unlimited Pantomic AI text queries</b>.
+      </div>
+    `);
+  }
+
+  // Settings
+  function openSettingsModal() {
+    document.getElementById('settingsModal').classList.add('active');
+  }
+  function closeSettingsModal() { document.getElementById('settingsModal').classList.remove('active'); }
+
+  // ==============================================================
+  // SPEECH / VOICE (AI TALK & VOICE MIC)
+  // ==============================================================
+  function speakBotResponse(btn, textToSpeak) {
+    if (!('speechSynthesis' in window)) {
+      alert("Voice speech is not supported in this browser.");
+      return;
+    }
+
+    if (speechSynthesis.speaking) {
+      speechSynthesis.cancel();
+      document.querySelectorAll('.btn-voice-listen').forEach(b => {
+        b.classList.remove('speaking');
+        b.innerHTML = '<span>🔊</span> Listen';
+      });
+      return;
+    }
+
+    // Strip HTML and clean text
+    const cleanText = textToSpeak.replace(/<[^>]*>?/gm, '').replace(/[*_#]/g, '');
+    const utterance = new SpeechSynthesisUtterance(cleanText);
+    utterance.rate = 1.0;
+    utterance.pitch = 1.0;
+
+    btn.classList.add('speaking');
+    btn.innerHTML = '<span>⏹</span> Stop';
+
+    utterance.onend = function() {
+      btn.classList.remove('speaking');
+      btn.innerHTML = '<span>🔊</span> Listen';
+    };
+    utterance.onerror = function() {
+      btn.classList.remove('speaking');
+      btn.innerHTML = '<span>🔊</span> Listen';
+    };
+
+    speechSynthesis.speak(utterance);
+  }
+
+  function handleVoiceDropdownClick() {
+    closeBotToolsDropdown();
+    toggleVoiceSpeechInput();
+  }
+
+  function toggleVoiceSpeechInput() {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      alert("Speech recognition is not supported in your browser. Please try in Chrome or Edge.");
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = 'en-IN';
+    recognition.interimResults = false;
+
+    const micBtns = document.querySelectorAll('.btn-voice-mic-action');
+    micBtns.forEach(b => {
+      b.classList.add('active');
+      b.innerHTML = '<span>🔴</span> Listening...';
+    });
+
+    recognition.onresult = function(event) {
+      const transcript = event.results[0][0].transcript;
+      promptInput.value = (promptInput.value ? promptInput.value + ' ' : '') + transcript;
+      autoExpandTextarea(promptInput);
+    };
+
+    recognition.onend = function() {
+      micBtns.forEach(b => {
+        b.classList.remove('active');
+        b.innerHTML = '<span>🎙</span> Voice';
+      });
+      promptInput.focus();
+    };
+
+    recognition.onerror = function() {
+      micBtns.forEach(b => {
+        b.classList.remove('active');
+        b.innerHTML = '<span>🎙</span> Voice';
+      });
+    };
+
+    recognition.start();
+  }
+
+  // ==============================================================
+  // CHATBOT ENGINE & SCROLL CONTROL (NEVER HIDES ANSWERS)
+  // ==============================================================
+  const streamInner = document.getElementById('streamInner');
+  const chatStream = document.getElementById('chatStream');
+  const promptInput = document.getElementById('promptInput');
+  const btnSend = document.getElementById('btnSend');
+
+  function autoExpandTextarea(el) {
+    el.style.height = 'auto';
+    el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+  }
+
+  function handleInputKey(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      executeSend();
+    }
+  }
+
+  function fillPrompt(txt) {
+    promptInput.value = txt;
+    promptInput.focus();
+    autoExpandTextarea(promptInput);
+
+  }
+
+  // Reset conversation
+  function startNewChat() {
+    if (speechSynthesis.speaking) speechSynthesis.cancel();
+    conversationSession = [];
+
+
+
+    streamInner.innerHTML = `
+      <div class="chat-hero-empty" id="emptyStateHero">
+        <h2>What can Pantomic answer today?</h2>
+        <p>Ask a market question, strategy rule, or request a text explanation of a chart pattern.</p>
+        <div class="quick-chips">
+          <div class="quick-chip" onclick="fillPrompt('Nifty me support aur resistance kaise identify kare?')">Nifty me support &amp; resistance kaise identify kare?</div>
+          <div class="quick-chip" onclick="fillPrompt('Give me today’s Nifty, Sensex, and Bank Nifty market update with source timestamps and clickable sources. Clearly label any delayed data.')">📈 Today’s Indian market update</div>
+<div class="quick-chip" onclick="fillPrompt('What are the latest Indian market headlines from today? Summarize likely impact and cite source links.')">📰 Latest market news</div>
+<div class="quick-chip" onclick="fillPrompt('What is a bull market?')">What is a bull market?</div>
+          <div class="quick-chip" onclick="fillPrompt('Golden rules of options trading')">Golden rules of options trading</div>
+          <div class="quick-chip" onclick="fillPrompt('Explain a bullish candlestick breakout setup, its confirmation, invalidation, and risk management.')">Explain a bullish breakout setup</div>
+        </div>
+      </div>
+    `;
+    promptInput.value = '';
+    promptInput.focus();
+    autoExpandTextarea(promptInput);
+    scrollToChatBottom(false);
+  }
+
+  // Rock-solid auto-scroll to bottom of chat
+  function scrollToChatBottom(smooth = true) {
+    setTimeout(() => {
+      if (chatStream) {
+        chatStream.scrollTo({
+          top: chatStream.scrollHeight + 500,
+          behavior: smooth ? 'smooth' : 'auto'
+        });
+      }
+    }, 50);
+  }
+
+  function appendUserMessage(text) {
+    const hero = document.getElementById('emptyStateHero');
+    if (hero) hero.remove();
+
+    const row = document.createElement('div');
+    row.className = 'msg-row user';
+    row.innerHTML = `
+      <div class="msg-bubble">
+        <p>${escapeHtml(text)}</p>
+      </div>
+    `;
+    streamInner.appendChild(row);
+    scrollToChatBottom(true);
+  }
+  function appendBotMessage(html, rawText) {
+    const hero = document.getElementById('emptyStateHero');
+    if (hero) hero.remove();
+
+    const row = document.createElement('div');
+    row.className = 'msg-row ai';
+
+    const safeRaw = (rawText || html).replace(/"/g, '&quot;');
+
+    row.innerHTML = `
+      <div class="msg-avatar">
+        <svg width="22" height="22" viewBox="0 0 100 100" fill="none">
+          <rect x="8" y="8" width="84" height="84" rx="22" fill="#0F172A" stroke="#1E293B" stroke-width="2"/>
+          <path d="M32 72 V28 H54 C62.8366 28 70 35.1634 70 44 C70 52.8366 62.8366 60 54 60 H44 V72 H32 Z" 
+                stroke="#10B981" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="msg-bubble">
+        ${html}
+        <div class="msg-actions">
+          <button class="btn-voice-listen" onclick="speakBotResponse(this, \`${safeRaw}\`)">
+            <span>🔊</span> Listen
+          </button>
+        </div>
+      </div>
+    `;
+    streamInner.appendChild(row);
+    scrollToChatBottom(true);
+    return row;
+  }
+
+  function showBotTyping() {
+    const row = document.createElement('div');
+    row.className = 'msg-row ai';
+    row.id = 'botTypingIndicator';
+    row.innerHTML = `
+      <div class="msg-avatar">
+        <svg width="22" height="22" viewBox="0 0 100 100" fill="none">
+          <rect x="8" y="8" width="84" height="84" rx="22" fill="#0F172A" stroke="#1E293B" stroke-width="2"/>
+          <path d="M32 72 V28 H54 C62.8366 28 70 35.1634 70 44 C70 52.8366 62.8366 60 54 60 H44 V72 H32 Z" 
+                stroke="#10B981" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="msg-bubble" style="display:flex;align-items:center;gap:8px;padding:12px 16px;">
+        <span style="font-size:12.5px;color:var(--text-muted);">Pantomic is analyzing...</span>
+      </div>
+    `;
+    streamInner.appendChild(row);
+    scrollToChatBottom(true);
+  }
+
+  function hideBotTyping() {
+    const el = document.getElementById('botTypingIndicator');
+    if (el) el.remove();
+  }
+
+  async function executeSend() {
+    const text = promptInput.value.trim();
+    if (!text) return;
+
+    const user = getActiveUser();
+    if (!user) {
+      openLoginModal();
+      return;
+    }
+
+    const isPremium = user.plan && user.plan.toLowerCase() === 'premium';
+    if (!isPremium && getUserQueryCount(user.id) >= DAILY_QUERY_LIMIT) {
+      appendUserMessage(text);
+      promptInput.value = '';
+      autoExpandTextarea(promptInput);
+      setTimeout(() => {
+        appendBotMessage(`
+          <div class="limit-box">
+            <b style="color:#EF4444;">Daily Query Limit Reached (10 / 10)</b>
+            You have reached your free daily limit of 10 text queries. Your queries reset daily at midnight.
+            <div style="margin-top:12px;">
+              <button class="btn btn-gold" style="font-size:12.5px;padding:8px 16px;" onclick="openUpgradeModal()">
+                Upgrade to Premium for Unlimited Queries
+              </button>
+            </div>
+          </div>
+        `, "You have reached your daily limit of 10 queries. Your free queries will reset tomorrow.");
+      }, 300);
+      return;
+    }
+
+    appendUserMessage(text);
+    promptInput.value = '';
+    autoExpandTextarea(promptInput);
+    btnSend.disabled = true;
+    recordUserQuery(user.id);
+    refreshAppState();
+    showBotTyping();
+
+    try {
+      const now = new Date();
+      const currentFullDate = now.toLocaleDateString('en-IN', {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
+      });
+      const currentFullTime = now.toLocaleTimeString('en-IN', {
+        hour: '2-digit', minute: '2-digit', hour12: true
+      });
+      const systemInstruction = `You are Pantomic AI. Today: ${currentFullDate}, ${currentFullTime} IST. Reply only in text and the user's language. Be brief and direct, usually 1–3 sentences. Format clearly with short Markdown headings, compact bullets or numbered steps, and bold key terms when helpful; avoid walls of text. Omit greetings, filler, repetition, website/publisher names, links, citations, source lists, and generic disclaimers. Use web search for current facts and synthesize only the requested information. For live/current market questions, identify the intended asset even if misspelled, then search its common name and ticker together (for example, Dow Jones Industrial Average, DJIA, and ^DJI). Prefer the newest timestamped quote. If an exact live quote is unavailable or the market is closed, give the closest recent confirmed quote or last close and clearly label it delayed/last available with its as-of time. For any other current question, if exact live information is unavailable, give the closest relevant recent confirmed update with its date/time and label its recency. Search again if results are irrelevant or only historical. Never invent or estimate facts or figures; say no recent data found only when no relevant dated result is available. For image requests, explain in words; do not generate images. Identify as Pantomic AI; do not claim to be ChatGPT or name the model provider.`;
+      const messages = [
+        { role: 'system', content: systemInstruction },
+        ...conversationSession.slice(-6),
+        { role: 'user', content: text }
+      ];
+      const chatResult = await requestAI("/api/chat", {
+        messages,
+        mobile: user.mobile,
+        plan: isPremium ? "Premium" : "Free"
+      });
+      if (chatResult.quota) {
+        saveUserQueryCount(user.id, chatResult.quota.used);
+        refreshAppState();
+      }
+      const answer = (chatResult.text || "").trim();
+      if (!answer) throw new Error("The AI returned an empty response. Please try again.");
+
+      hideBotTyping();
+      btnSend.disabled = false;
+      appendBotMessage(formatMarkdownResponse(answer), answer);
+      conversationSession.push({ role: 'user', content: text });
+      conversationSession.push({ role: 'assistant', content: answer });
+    } catch (err) {
+      hideBotTyping();
+      btnSend.disabled = false;
+      if (err?.payload?.quota) {
+        saveUserQueryCount(user.id, err.payload.quota.used);
+        refreshAppState();
+      }
+      const message = err?.message || "Could not reach the AI service. Please try again.";
+      appendBotMessage(`<p>⚠️ ${escapeHtml(message)}</p>`, "AI request failed.");
+    }
+  }
+  function formatMarkdownResponse(raw) {
+    const lines = (raw || '').split('\n');
+    let html = '';
+    let listType = '';
+    let codeLines = [];
+    let inCode = false;
+
+    const closeList = () => {
+      if (listType) html += `</${listType}>`;
+      listType = '';
+    };
+
+    lines.forEach(line => {
+      const trimmed = line.trim();
+      if (trimmed.startsWith('```')) {
+        closeList();
+        if (inCode) {
+          html += `<pre><code>${escapeHtml(codeLines.join('\n'))}</code></pre>`;
+          codeLines = [];
+          inCode = false;
+        } else {
+          inCode = true;
+        }
+        return;
+      }
+      if (inCode) {
+        codeLines.push(line);
+        return;
+      }
+      if (!trimmed) {
+        closeList();
+        return;
+      }
+      const heading = trimmed.match(/^(#{1,4})\s+(.+)$/);
+      const ordered = trimmed.match(/^\d+[.)]\s+(.+)$/);
+      const unordered = trimmed.match(/^[-*•]\s+(.+)$/);
+
+      if (heading) {
+        closeList();
+        const level = Math.min(heading[1].length + 2, 5);
+        html += `<h${level}>${renderInlineMarkdown(heading[2])}</h${level}>`;
+      } else if (ordered || unordered) {
+        const nextType = ordered ? 'ol' : 'ul';
+        if (listType !== nextType) {
+          closeList();
+          html += `<${nextType}>`;
+          listType = nextType;
+        }
+        html += `<li>${renderInlineMarkdown((ordered || unordered)[1])}</li>`;
+      } else if (/^(---+|\*\*\*+|___+)$/.test(trimmed)) {
+        closeList();
+        html += '<hr>';
+      } else if (trimmed.startsWith('> ')) {
+        closeList();
+        html += `<blockquote>${renderInlineMarkdown(trimmed.slice(2))}</blockquote>`;
+      } else {
+        closeList();
+        html += `<p>${renderInlineMarkdown(trimmed)}</p>`;
+      }
+    });
+    if (inCode) html += `<pre><code>${escapeHtml(codeLines.join('\n'))}</code></pre>`;
+    closeList();
+    return html;
+  }
+
+  function renderInlineMarkdown(str) {
+    return escapeHtml(str)
+      .replace(/`([^`\n]+)`/g, '<code>$1</code>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/(^|[\s(])\*([^*\n]+)\*(?=$|[\s).,!?:])/g, '$1<em>$2</em>');
+  }
+
+  function escapeHtml(str) {
+    const d = document.createElement('div');
+    d.textContent = str || '';
+    return d.innerHTML;
+  }
+
+  // Initial state check
+  refreshAppState();
+
+</script>
+
+<!-- Global Toast Notification Container -->
+<div id="toastNotification" class="toast-notification"></div>
+
+</body>
+</html>

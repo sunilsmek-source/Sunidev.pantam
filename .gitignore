@@ -5,5 +5,3 @@ node_modules/
 .vercel/
 .pantomic-quota-secret
 .pantomic-quota-usage.json
-.pantonic-quota-secret
-.pantonic-quota-usage.json

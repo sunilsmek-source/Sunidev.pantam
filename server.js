@@ -4,11 +4,11 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = dirname(fileURLToPath(import.meta.url));
-const host = process.env.HOST || "127.0.0.1";
+const host = process.env.HOST || "0.0.0.0";
 const port = Number(process.env.PORT || 3000);
 const maxBodyBytes = 1024 * 1024;
-const openAiResponsesUrl = "https://api.openai.com/v1/responses";
-const chatModel = "gpt-6-luna";
+const openAiResponsesUrl = "https://api.openai.com/v1/chat/completions";
+const chatModel = process.env.OPENAI_MODEL || "gpt-4o-mini";
 const localGoogleSheetsWebhookUrl = "https://script.google.com/macros/s/AKfycby7p4KvsL-t6jqTuV6bIg9f4ntXdfWIJBIJvVxhYmWjr_DCDkNeqiWDOjp9YiAzy8U/exec";
 
 async function loadLocalEnv() {
@@ -31,12 +31,12 @@ async function loadLocalEnv() {
 await loadLocalEnv();
 
 const isVercel = Boolean(process.env.VERCEL);
-const googleSheetsWebhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL || (isVercel ? "" : localGoogleSheetsWebhookUrl);
+const googleSheetsWebhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL || localGoogleSheetsWebhookUrl;
 
 const publicFiles = new Map([
   ["/", "index.html"],
   ["/index.html", "index.html"],
-  ["/pantonic_logo.svg", "pantonic_logo.svg"],
+  ["/AI with homepage.html", "AI with homepage.html"],
   ["/pantomic_logo.svg", "pantomic_logo.svg"]
 ]);
 
@@ -44,26 +44,26 @@ function sendJson(response, status, value) {
   response.writeHead(status, {
     "Content-Type": "application/json; charset=utf-8",
     "Cache-Control": "no-store",
-    "X-Content-Type-Options": "nosniff"
+    "X-Content-Type-Options": "nosniff",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization"
   });
   response.end(JSON.stringify(value));
 }
 
 function checkOrigin(request) {
-  if (request.headers["sec-fetch-site"] === "cross-site") return false;
-  const origin = request.headers.origin;
-  if (!origin) return true;
-  try {
-    const parsed = new URL(origin);
-    return (parsed.protocol === "http:" || parsed.protocol === "https:") && parsed.host === request.headers.host;
-  } catch {
-    return false;
-  }
+  return true;
 }
 
 function allowRequest(request, response) {
-  if (!checkOrigin(request)) {
-    sendJson(response, 403, { error: "This request was blocked by the same-origin policy." });
+  if (request.method === "OPTIONS") {
+    response.writeHead(204, {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization"
+    });
+    response.end();
     return false;
   }
   return true;
@@ -163,11 +163,14 @@ function hideSourceReferences(value) {
 }
 
 function extractOutput(data) {
-  const textParts = (data.output || [])
+  if (data?.choices?.[0]?.message?.content) {
+    return hideSourceReferences(data.choices[0].message.content);
+  }
+  const textParts = (data?.output || [])
     .filter(item => item.type === "message")
     .flatMap(item => item.content || [])
     .filter(part => part.type === "output_text" && typeof part.text === "string");
-  const text = textParts.map(part => part.text).join("\n") || (typeof data.output_text === "string" ? data.output_text : "");
+  const text = textParts.map(part => part.text).join("\n") || (typeof data?.output_text === "string" ? data.output_text : "");
   return hideSourceReferences(text);
 }
 
@@ -281,15 +284,11 @@ async function handleApi(request, response, pathname) {
 
     if (pathname === "/api/chat") {
       const messages = normalizeMessages(body.messages);
-      const forceWebSearch = requiresFreshWebSearch(messages);
       const data = await callOpenAI({
         model: chatModel,
-        reasoning: { effort: forceWebSearch ? "low" : "none" },
-        input: messages,
-        tools: [{ type: "web_search", search_context_size: forceWebSearch ? "medium" : "low", external_web_access: true }],
-        tool_choice: forceWebSearch ? "required" : "auto",
-        max_output_tokens: 250,
-        store: false
+        messages: messages,
+        max_tokens: 600,
+        temperature: 0.7
       });
       sendJson(response, 200, { text: extractOutput(data) });
       return;
@@ -341,6 +340,6 @@ if (!isVercel) {
       else response.destroy();
     });
   }).listen(port, host, () => {
-    console.log(`Pantonic AI is running at http://${host}:${port}`);
+    console.log(`Pantomic AI is running at http://${host}:${port}`);
   });
 }

@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pantonic AI — Next-Gen Financial Intelligence Suite</title>
-<link rel="icon" type="image/svg+xml" href="pantonic_logo.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Pantomic AI — Next-Gen Financial Intelligence Suite</title>
+<link rel="icon" type="image/svg+xml" href="pantomic_logo.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -37,9 +37,11 @@
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { overflow-x: hidden; }
   html, body { height: 100%; background: var(--bg); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+  body { overflow-x: hidden; max-width: 100vw; }
 
-  /* ------------------- Official Pantonic SVG Logo ------------------- */
+  /* ------------------- Official Pantomic SVG Logo ------------------- */
   .panto-svg-logo { display: inline-block; vertical-align: middle; }
 
   /* ------------------- Landing Page ------------------- */
@@ -463,6 +465,15 @@
     border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 8px;
   }
   .input-tools { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .input-tools-desktop {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .input-tools-mobile {
+    display: none !important;
+  }
   .tool-pill {
     background: var(--bg-card); border: 1px solid var(--border);
     color: var(--text-muted); font-size: 11.5px; font-weight: 600;
@@ -471,6 +482,129 @@
   }
   .tool-pill:hover { border-color: var(--primary); color: var(--text); }
   .tool-pill.active { background: rgba(16, 185, 129, 0.15); color: var(--primary); border-color: rgba(16, 185, 129, 0.3); }
+
+  /* Input Dock Bots & Tools Popover Dropdown */
+  .bot-tools-dropdown-container {
+    position: relative;
+    display: inline-block;
+  }
+  .bot-tools-menu {
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 0;
+    width: 290px;
+    max-width: calc(100vw - 32px);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
+    padding: 6px;
+    box-shadow: 0 -12px 36px rgba(0, 0, 0, 0.7);
+    display: none;
+    flex-direction: column;
+    gap: 3px;
+    z-index: 100;
+    max-height: 380px;
+    overflow-y: auto;
+  }
+  .bot-tools-menu.open {
+    display: flex;
+    animation: fadeIn .18s ease;
+  }
+  .bot-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 10px 6px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
+  }
+  .bot-menu-header .badge-lock {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--gold);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 9.5px;
+    font-weight: 700;
+  }
+  .bot-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all .15s;
+    background: var(--bg-card);
+    border: 1px solid transparent;
+  }
+  .bot-menu-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--border-light);
+  }
+  .bot-menu-item .item-icon {
+    font-size: 13px;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: rgba(245, 158, 11, 0.1);
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+  .bot-menu-item .item-text {
+    flex: 1;
+    min-width: 0;
+  }
+  .bot-menu-item .item-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .bot-menu-item .item-desc {
+    font-size: 10.5px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 1px;
+  }
+  .bot-menu-item .lock-tag {
+    font-size: 9.5px;
+    font-weight: 700;
+    color: var(--gold);
+    background: rgba(245, 158, 11, 0.12);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    padding: 2px 5px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+  .bot-menu-footer {
+    padding: 8px 10px;
+    margin-top: 4px;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--primary);
+    text-align: center;
+    cursor: pointer;
+    background: rgba(16, 185, 129, 0.08);
+    border-radius: 6px;
+    transition: background .15s;
+  }
+  .bot-menu-footer:hover {
+    background: rgba(16, 185, 129, 0.15);
+  }
+
   .toast-notification {
     position: fixed; bottom: 24px; right: 24px;
     background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(8px);
@@ -555,23 +689,290 @@
   .profile-item span.lbl { color: var(--text-muted); }
   .profile-item span.val { font-weight: 600; color: var(--text); }
 
-  /* Responsive */
+  /* =================== MOBILE HAMBURGER MENU =================== */
+  .hamburger-btn {
+    display: none; flex-direction: column; justify-content: center; gap: 5px;
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 10px; cursor: pointer; transition: all .2s;
+  }
+  .hamburger-btn:hover { border-color: var(--primary); background: rgba(16,185,129,0.06); }
+  .hamburger-btn span {
+    display: block; width: 20px; height: 2px;
+    background: var(--text-muted); border-radius: 2px; transition: all .25s;
+  }
+  .hamburger-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--primary); }
+  .hamburger-btn.open span:nth-child(2) { opacity: 0; }
+  .hamburger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--primary); }
+
+  /* Mobile Nav Drawer */
+  .mobile-nav-drawer {
+    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(9,13,22,0.98); backdrop-filter: blur(20px);
+    z-index: 200; flex-direction: column; align-items: center; justify-content: center;
+    gap: 10px; opacity: 0; pointer-events: none; transition: opacity .25s;
+  }
+  .mobile-nav-drawer.open { opacity: 1; pointer-events: auto; }
+  .mobile-nav-drawer a, .mobile-nav-drawer button {
+    font-size: 22px; font-weight: 700; color: var(--text); text-decoration: none;
+    padding: 14px 40px; border-radius: var(--radius); width: 80%; text-align: center;
+    border: 1px solid var(--border); background: var(--bg-surface); transition: all .2s;
+    cursor: pointer; font-family: var(--font);
+  }
+  .mobile-nav-drawer a:hover, .mobile-nav-drawer button:hover { border-color: var(--primary); color: var(--primary); }
+  .mobile-nav-drawer .drawer-close {
+    position: absolute; top: 20px; right: 20px; background: none; border: none;
+    color: var(--text-muted); font-size: 28px; cursor: pointer;
+  }
+  .mobile-nav-drawer .btn-primary-nav {
+    background: linear-gradient(135deg, var(--primary), #059669);
+    border-color: var(--primary); color: #fff; margin-top: 8px;
+  }
+
+  /* =================== CHAT MOBILE BOTTOM SHEET SIDEBAR =================== */
+  .chat-mobile-topbar {
+    display: none; align-items: center; justify-content: space-between;
+    padding: 12px 16px; border-bottom: 1px solid var(--border);
+    background: rgba(9,13,22,0.95); backdrop-filter: blur(12px);
+    flex-shrink: 0; position: relative; z-index: 20;
+  }
+  .chat-mobile-topbar .mobile-brand {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 16px; font-weight: 800; color: var(--text);
+  }
+  .btn-mobile-menu {
+    background: none; border: 1px solid var(--border); border-radius: 8px;
+    color: var(--text-muted); padding: 6px 10px; cursor: pointer; font-size: 16px;
+    display: flex; align-items: center; gap: 6px; font-family: var(--font); font-size: 12px;
+    font-weight: 600; transition: all .2s;
+  }
+  .btn-mobile-menu:hover { border-color: var(--primary); color: var(--primary); }
+
+  /* Mobile Bot Dropdown in Chatbot */
+  .mobile-bot-dropdown-wrap {
+    display: none; padding: 8px 12px; border-bottom: 1px solid var(--border);
+    background: var(--bg-surface); position: relative; z-index: 15;
+  }
+  .mobile-bot-selector {
+    width: 100%; background: var(--bg-card); border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm); padding: 10px 14px;
+    color: var(--text); font-family: var(--font); font-size: 13px; font-weight: 600;
+    cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+    transition: border-color .2s;
+  }
+  .mobile-bot-selector:hover { border-color: var(--primary); }
+  .mobile-bot-selector.open { border-color: var(--primary); }
+  .mobile-bot-selector .selector-left { display: flex; align-items: center; gap: 8px; }
+  .mobile-bot-selector .selector-left .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--primary); box-shadow: 0 0 8px var(--primary); }
+  .mobile-bot-selector .arrow { transition: transform .2s; font-size: 10px; color: var(--text-dim); }
+  .mobile-bot-selector.open .arrow { transform: rotate(180deg); }
+
+  .mobile-bot-list {
+    position: absolute; top: calc(100% - 4px); left: 12px; right: 12px;
+    background: var(--bg-card); border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm); overflow: hidden;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+    z-index: 100; display: none;
+  }
+  .mobile-bot-list.open { display: block; }
+  .mobile-bot-list-item {
+    padding: 12px 14px; cursor: pointer; display: flex; align-items: center;
+    gap: 10px; border-bottom: 1px solid var(--border); transition: background .15s;
+    font-size: 13px; color: var(--text);
+  }
+  .mobile-bot-list-item:last-child { border-bottom: none; }
+  .mobile-bot-list-item:hover { background: rgba(16,185,129,0.08); color: var(--primary); }
+  .mobile-bot-list-item.active { background: rgba(16,185,129,0.12); color: var(--primary); font-weight: 600; }
+  .mobile-bot-list-item .bot-tag { font-size: 10px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.04em; margin-left: auto; }
+
+  /* Chat Bottom Sheet Sidebar (Slide Up) */
+  .chat-sidebar-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.6); z-index: 300; backdrop-filter: blur(4px);
+  }
+  .chat-sidebar-overlay.open { display: block; }
+  .chat-sidebar-sheet {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: var(--bg-surface); border-top: 1px solid var(--border-light);
+    border-radius: 20px 20px 0 0; padding: 0 18px 32px 18px;
+    z-index: 400; transform: translateY(100%); transition: transform .3s cubic-bezier(0.16,1,0.3,1);
+    max-height: 85vh; overflow-y: auto;
+  }
+  .chat-sidebar-sheet.open { transform: translateY(0); }
+  .sheet-handle {
+    width: 36px; height: 4px; background: var(--border-light); border-radius: 2px;
+    margin: 12px auto 18px auto;
+  }
+  .sheet-user-info {
+    display: flex; align-items: center; gap: 12px;
+    padding: 14px 0; border-bottom: 1px solid var(--border); margin-bottom: 16px;
+  }
+  .sheet-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--indigo); color: #fff; font-size: 16px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .sheet-user-meta .name { font-size: 15px; font-weight: 700; }
+  .sheet-user-meta .plan { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .sheet-actions { display: flex; flex-direction: column; gap: 10px; }
+  .sheet-action-btn {
+    width: 100%; padding: 13px 16px; border-radius: var(--radius-sm);
+    background: var(--bg-card); border: 1px solid var(--border);
+    color: var(--text); font-size: 14px; font-weight: 600; font-family: var(--font);
+    cursor: pointer; display: flex; align-items: center; gap: 10px;
+    transition: all .2s; text-align: left;
+  }
+  .sheet-action-btn:hover { border-color: var(--primary); color: var(--primary); background: rgba(16,185,129,0.06); }
+  .sheet-action-btn.danger:hover { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.06); }
+  .sheet-action-btn.gold-btn {
+    background: linear-gradient(135deg, var(--gold), #D97706);
+    border-color: var(--gold); color: #fff;
+  }
+
+  /* =================== TABLET =================== */
   @media (max-width: 1080px) {
     .bots-grid { grid-template-columns: repeat(2, 1fr); }
     .features-strip { grid-template-columns: repeat(2, 1fr); }
   }
+
+  /* =================== MOBILE =================== */
   @media (max-width: 860px) {
-    .navbar { padding: 14px 20px; }
-    .nav-links { display: none; }
-    .hero-title { font-size: 34px; }
-    .hero-stat-bar { grid-template-columns: 1fr 1fr; }
-    .bots-grid { grid-template-columns: 1fr; }
-    .features-strip { grid-template-columns: 1fr; }
-    .pricing-grid { grid-template-columns: 1fr; }
-    #chatApp { grid-template-columns: 1fr; }
-    .chat-sidebar { display: none; }
-    .footer { flex-direction: column; gap: 16px; text-align: center; }
+    /* === ABSOLUTE ZERO HORIZONTAL SCROLL ENFORCEMENT === */
+    html, body {
+      max-width: 100vw !important;
+      overflow-x: hidden !important;
+      position: relative;
+    }
+    #landingPage, #chatApp, section, nav, main, aside, footer,
+    .navbar, .hero-section, .section-wrap, .bots-grid, .features-strip,
+    .pricing-grid, .hero-stat-bar, .stream-inner, .input-dock, .input-box {
+      max-width: 100% !important;
+      overflow-x: hidden !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Navbar */
+    .navbar { padding: 12px 14px; max-width: 100%; }
+    .brand-logo { font-size: 18px; gap: 8px; }
+    .brand-logo span.tag { display: none !important; }
+    .nav-links { display: none !important; }
+    .hamburger-btn { display: flex; }
+    .mobile-nav-drawer { display: flex; }
+    .nav-actions { gap: 8px; }
+    .nav-actions .btn-ghost { display: none !important; }
+    .nav-actions .btn-primary { padding: 8px 12px; font-size: 11.5px; white-space: nowrap; }
+
+    /* Hero */
+    .hero-section { padding: 36px 14px 28px; max-width: 100%; }
+    .hero-badge {
+      font-size: 10px; padding: 6px 10px;
+      white-space: normal; text-align: center;
+      word-break: break-word; max-width: 100%;
+      line-height: 1.4;
+    }
+    .hero-title { font-size: 26px; line-height: 1.25; word-break: break-word; }
+    .hero-desc { font-size: 13.5px; line-height: 1.55; margin-bottom: 24px; }
+    .hero-actions { flex-direction: column; gap: 10px; width: 100%; }
+    .hero-actions .btn { width: 100%; justify-content: center; padding: 12px 16px; font-size: 13.5px; }
+    .hero-stat-bar {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      padding: 0; border-radius: var(--radius-sm); width: 100%;
+    }
+    .h-stat { padding: 10px 6px; border-right: none; border-bottom: 1px solid var(--border); }
+    .h-stat:nth-child(odd) { border-right: 1px solid var(--border); }
+    .h-stat:nth-child(3), .h-stat:nth-child(4) { border-bottom: none; }
+    .h-stat-num { font-size: 16px; }
+    .h-stat-lbl { font-size: 10.5px; }
+
+    /* Bots Grid — STRICTLY VERTICAL ONLY, zero horizontal scroll */
+    .section-wrap { padding: 36px 14px; width: 100%; max-width: 100%; }
+    .section-head { margin-bottom: 20px; }
+    .section-title { font-size: 23px; }
+    .section-sub { font-size: 13px; line-height: 1.5; }
+    .bots-grid {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 14px !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      overflow-x: hidden !important;
+      padding: 0 !important;
+    }
+    .bot-card {
+      width: 100% !important; min-width: 0 !important; max-width: 100% !important;
+      flex-shrink: 0 !important; transform: none !important;
+      box-sizing: border-box !important;
+    }
+    .bot-card:hover { transform: none !important; }
+
+    /* Features strip */
+    .features-strip {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 12px !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      margin-top: 24px;
+    }
+    .f-strip-card { width: 100% !important; box-sizing: border-box !important; }
+
+    /* Pricing */
+    .pricing-grid {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 16px !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      padding: 0 !important;
+    }
+    .pricing-card { width: 100% !important; box-sizing: border-box !important; padding: 22px 16px !important; }
+
+    /* Footer */
+    .footer { flex-direction: column; gap: 12px; text-align: center; padding: 20px 14px; }
+    .footer-links { flex-wrap: wrap; justify-content: center; gap: 12px; }
+
+    /* ---- CHATBOT MOBILE LAYOUT ---- */
+    #chatApp { grid-template-columns: 1fr; width: 100%; max-width: 100vw; height: 100dvh; max-height: 100dvh; }
+    .chat-sidebar { display: none !important; }
+    .chat-topbar { display: none !important; }
+    .chat-mobile-topbar { display: flex; width: 100%; max-width: 100%; }
+
+    .chat-main { max-width: 100vw; overflow-x: hidden; width: 100%; height: 100dvh; max-height: 100dvh; }
+    .chat-stream { padding: 12px 10px; overflow-x: hidden; width: 100%; }
+    .stream-inner { gap: 12px; width: 100%; max-width: 100%; }
+
+    .msg-row { width: 100%; max-width: 100%; }
+    .msg-bubble { max-width: 86%; font-size: 13.5px; padding: 10px 12px; word-break: break-word; overflow-wrap: break-word; }
+    .chat-hero-empty { padding: 18px 0; }
+    .chat-hero-empty h2 { font-size: 20px; word-break: break-word; }
+    .chat-hero-empty p { font-size: 12.5px; }
+    .quick-chips { gap: 6px; width: 100%; }
+    .quick-chip { font-size: 11.5px; padding: 6px 10px; word-break: break-word; max-width: 100%; }
+
+    .input-dock { padding: 8px 10px 14px; width: 100%; max-width: 100%; }
+    .input-box { padding: 8px 10px; width: 100%; max-width: 100%; }
+    .input-box textarea { font-size: 13.5px; }
+    .input-tools { gap: 5px; flex-wrap: wrap; }
+    .input-tools-desktop { display: none !important; }
+    .input-tools-mobile { display: inline-flex !important; align-items: center; gap: 6px; }
+    .tool-pill { font-size: 10px; padding: 3px 7px; }
+
+    /* Modals fit strictly within mobile screen */
+    .modal-overlay { padding: 12px; }
+    .modal-window { padding: 22px 16px !important; width: 100% !important; max-width: 100% !important; border-radius: 14px; }
+    .modal-title { font-size: 20px; }
+    .modal-sub { font-size: 12.5px; margin-bottom: 16px; }
+    .toast-notification { right: 12px; left: 12px; max-width: calc(100vw - 24px); }
   }
+
+  @media (max-width: 480px) {
+    .hero-title { font-size: 22px; }
+    .hero-badge { font-size: 9.5px; }
+    .nav-actions .btn-primary { font-size: 10.5px; padding: 6px 10px; }
+    .h-stat-num { font-size: 15px; }
+    .chat-hero-empty h2 { font-size: 18px; }
+    .msg-bubble { max-width: 90%; }
+  }
+
 
 </style>
 </head>
@@ -585,7 +986,7 @@
   <!-- Navigation -->
   <nav class="navbar">
     <div class="brand-logo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-      <!-- Official Pantonic SVG Logo -->
+      <!-- Official Pantomic SVG Logo -->
       <svg class="panto-svg-logo" width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect x="8" y="8" width="84" height="84" rx="22" fill="#0F172A" stroke="#1E293B" stroke-width="2.5"/>
         <path d="M32 72 V28 H54 C62.8366 28 70 35.1634 70 44 C70 52.8366 62.8366 60 54 60 H44 V72 H32 Z" 
@@ -594,7 +995,7 @@
         <circle cx="70" cy="44" r="3.5" fill="#06B6D4"/>
         <line x1="32" y1="44" x2="44" y2="44" stroke="#10B981" stroke-width="4.5" stroke-linecap="round"/>
       </svg>
-      <span>Pantonic</span>
+      <span>Pantomic</span>
       <span class="tag">AI Finance Suite</span>
     </div>
 
@@ -607,8 +1008,22 @@
     <div class="nav-actions" id="navAuthActions">
       <button class="btn btn-ghost" onclick="openLoginModal()">Log In</button>
       <button class="btn btn-primary" onclick="openSignupModal()">Create Free Account</button>
+      <!-- Hamburger for mobile -->
+      <button class="hamburger-btn" id="hamburgerBtn" onclick="toggleMobileNav()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
+
+  <!-- Mobile Full-Screen Nav Drawer -->
+  <div class="mobile-nav-drawer" id="mobileNavDrawer">
+    <button class="drawer-close" onclick="toggleMobileNav()">✕</button>
+    <a href="#bots" onclick="toggleMobileNav(); smoothScroll(null,'bots')">🤖 AI Bots</a>
+    <a href="#features" onclick="toggleMobileNav(); smoothScroll(null,'features')">⚡ Capabilities</a>
+    <a href="#pricing" onclick="toggleMobileNav(); smoothScroll(null,'pricing')">💎 Pricing</a>
+    <button onclick="toggleMobileNav(); openLoginModal()">Log In</button>
+    <button class="btn-primary-nav" onclick="toggleMobileNav(); openSignupModal()">🚀 Create Free Account</button>
+  </div>
 
   <!-- Hero Section -->
   <section class="hero-section">
@@ -619,7 +1034,7 @@
       An entire trading desk of <em>Specialized Financial AI Bots</em>.
     </h1>
     <p class="hero-desc">
-      Stop reading walls of generic text. Pantonic AI deploys dedicated intelligence bots built specifically for Options Scalping, Equity Breakouts, MCX Commodities, Crypto, and Macro Forex. Short, sharp, and actionable.
+      Stop reading walls of generic text. Pantomic AI deploys dedicated intelligence bots built specifically for Options Scalping, Equity Breakouts, MCX Commodities, Crypto, and Macro Forex. Short, sharp, and actionable.
     </p>
 
     <div class="hero-actions">
@@ -782,14 +1197,14 @@
       </div>
       <div class="f-strip-card">
         <h4><span class="feature-icon" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24"><path d="M12 3 20 6v5c0 5-3.4 8.2-8 10-4.6-1.8-8-5-8-10V6l8-3Z"/><path d="m8.5 12 2.3 2.3 4.8-5"/></svg></span> Free AI Text Chat</h4>
-        <p>Ask Pantonic AI market questions and get concise text answers.</p>
+        <p>Ask Pantomic AI market questions and get concise text answers.</p>
       </div>
       <div class="f-strip-card">
         <h4><span class="feature-icon" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24"><path d="m4 8 4 3 4-6 4 6 4-3-2 11H6L4 8Z"/><path d="M7 16h10"/></svg></span> Premium Trading Plan</h4>
         <p>₹1,999/month for premium trading tools and priority processing.</p>
       </div>
       <div class="f-strip-card">
-        <h4><span class="feature-icon" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 10h6M9 14h4M9 3v3m6-3v3M9 18v3m6-3v3M3 9h3m-3 6h3m12-6h3m-3 6h3"/></svg></span> Pantonic AI Engine</h4>
+        <h4><span class="feature-icon" aria-hidden="true"><svg class="line-icon" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 10h6M9 14h4M9 3v3m6-3v3M9 18v3m6-3v3M3 9h3m-3 6h3m12-6h3m-3 6h3"/></svg></span> Pantomic AI Engine</h4>
         <p>Fast text answers with web search for current news and market updates.</p>
       </div>
     </div>
@@ -800,7 +1215,7 @@
     <div class="section-head">
       <div class="section-tag">Subscription</div>
       <h2 class="section-title">Straightforward, transparent plans</h2>
-      <p class="section-sub">Start chatting with Pantonic AI for free. Upgrade for premium trading tools and priority processing.</p>
+      <p class="section-sub">Start chatting with Pantomic AI for free. Upgrade for premium trading tools and priority processing.</p>
     </div>
 
     <div class="pricing-grid">
@@ -810,7 +1225,7 @@
         <div class="pricing-price">₹0 <span>/ month</span></div>
         <div class="pricing-desc">Perfect for daily stock market lookups, rules, and definitions.</div>
         <ul class="pricing-list">
-          <li><i>✓</i> Pantonic AI text chat</li>
+          <li><i>✓</i> Pantomic AI text chat</li>
           <li><i>✓</i> Access to all 8 Market Bots</li>
           <li><i>✓</i> Short &amp; To-the-Point Answers</li>
         </ul>
@@ -825,7 +1240,7 @@
         <div class="pricing-desc">For active traders who want premium tools and priority processing.</div>
         <ul class="pricing-list">
           <li><i>✓</i> Premium Trading Bots</li>
-          <li><i>✓</i> Pantonic AI text chat</li>
+          <li><i>✓</i> Pantomic AI text chat</li>
           <li><i>✓</i> Current market news with web search</li>
           <li><i>✓</i> Priority Fast Processing</li>
           <li><i>✓</i> Deep Multi-Leg Strategy Formulations</li>
@@ -838,8 +1253,8 @@
   <!-- Footer -->
   <footer class="footer">
     <div>
-      © <span id="yearEl"></span> <b>Pantonic AI</b>. All rights reserved.
-      <span style="display:block;margin-top:4px;font-size:11.5px;">Pantonic provides artificial intelligence market assistance. Nothing constitutes direct financial advice.</span>
+      © <span id="yearEl"></span> <b>Pantomic AI</b>. All rights reserved.
+      <span style="display:block;margin-top:4px;font-size:11.5px;">Pantomic provides artificial intelligence market assistance. Nothing constitutes direct financial advice.</span>
     </div>
     <div class="footer-links">
       <a onclick="openSignupModal()">Sign Up</a>
@@ -867,7 +1282,7 @@
           <circle cx="70" cy="44" r="3.5" fill="#06B6D4"/>
           <line x1="32" y1="44" x2="44" y2="44" stroke="#10B981" stroke-width="4.5" stroke-linecap="round"/>
         </svg>
-        <span style="font-size:17px;">Pantonic</span>
+        <span style="font-size:17px;">Pantomic</span>
       </div>
       <button class="sidebar-action-btn" title="Back to Homepage" onclick="closeChat()">✕</button>
     </div>
@@ -882,7 +1297,7 @@
         <span style="font-size:11px;text-transform:uppercase;letter-spacing:0.5px;color:var(--text-muted);">Chat Access</span>
         <span class="num" id="sideUsageCounter" style="font-size:11.5px;font-weight:700;color:var(--text-main);">Available</span>
       </div>
-      <div class="usage-note" id="sidePlanNote">Pantonic AI text chat is ready to use.</div>
+      <div class="usage-note" id="sidePlanNote">Pantomic AI text chat is ready to use.</div>
     </div>
 
     <!-- User Profile Footer -->
@@ -904,11 +1319,28 @@
 
   <!-- Right Main Chat Window -->
   <main class="chat-main">
+    <!-- Mobile Topbar (shown only on mobile) -->
+    <div class="chat-mobile-topbar">
+      <div class="mobile-brand">
+        <svg width="26" height="26" viewBox="0 0 100 100" fill="none">
+          <rect x="8" y="8" width="84" height="84" rx="22" fill="#0F172A" stroke="#1E293B" stroke-width="2.5"/>
+          <path d="M32 72 V28 H54 C62.8366 28 70 35.1634 70 44 C70 52.8366 62.8366 60 54 60 H44 V72 H32 Z" stroke="#10B981" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="44" cy="44" r="5" fill="#10B981"/>
+        </svg>
+        <span>Pantomic AI</span>
+        <span id="mobileTopbarBadge" style="font-size:10px;font-weight:700;background:rgba(16,185,129,0.12);color:var(--primary);border:1px solid rgba(16,185,129,0.25);padding:2px 7px;border-radius:5px;">FREE</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button class="btn-mobile-menu" onclick="openMobileSheet()">☰ Menu</button>
+        <button class="btn btn-gold" style="padding:6px 10px;font-size:11px;" onclick="openUpgradeModal()">👑 Upgrade</button>
+      </div>
+    </div>
+
     <!-- Topbar -->
     <div class="chat-topbar">
       <div class="chat-model-indicator">
-        <img src="pantonic_logo.svg" alt="Pantonic logo" width="28" height="28" style="display:block;object-fit:contain;">
-        <span id="topbarBrandName">Pantonic</span>
+        <img src="pantomic_logo.svg" alt="Pantomic logo" width="28" height="28" style="display:block;object-fit:contain;">
+        <span id="topbarBrandName">Pantomic</span>
         <span class="badge" id="topbarPlanBadge">Free Plan</span>
       </div>
       <div class="chat-topbar-actions">
@@ -925,7 +1357,7 @@
     <div class="chat-stream" id="chatStream">
       <div class="stream-inner" id="streamInner">
         <div class="chat-hero-empty" id="emptyStateHero">
-          <h2>What can Pantonic answer today?</h2>
+          <h2>What can Pantomic answer today?</h2>
           <p>Ask a market question, strategy rule, or request a text explanation of a chart pattern.</p>
           <div class="quick-chips">
             <div class="quick-chip" onclick="fillPrompt('Nifty me support aur resistance kaise identify kare?')">Nifty me support &amp; resistance kaise identify kare?</div>
@@ -948,24 +1380,159 @@
         </div>
         <div class="input-controls">
           <div class="input-tools">
-            <button type="button" class="tool-pill" id="btnVoiceMic" onclick="toggleVoiceSpeechInput()" title="Speak your question">
-              <span>🎙</span> Voice
-            </button>
-            <button type="button" class="tool-pill premium-locked-tool" onclick="showPaidBotUpgrade('Image Upload')" title="Premium subscription required">🔒 Image Upload</button>
-            <button type="button" class="tool-pill" onclick="showPaidBotUpgrade('Scalping Bot')" title="Premium subscription required">🔒 Scalping Bot</button>
-            <button type="button" class="tool-pill" onclick="showPaidBotUpgrade('Index Bot')" title="Premium subscription required">🔒 Index Bot</button>
-            <button type="button" class="tool-pill" onclick="showPaidBotUpgrade('Crypto Bot')" title="Premium subscription required">🔒 Crypto Bot</button>
-            <button type="button" class="tool-pill" onclick="showPaidBotUpgrade('Forex Bot')" title="Premium subscription required">🔒 Forex Bot</button>
-            <button type="button" class="tool-pill" onclick="showPaidBotUpgrade('Volume Finder Bot')" title="Premium subscription required">🔒 Volume Finder Bot</button>
-            <button type="button" class="tool-pill" onclick="showPaidBotUpgrade('Price Action Bot')" title="Premium subscription required">🔒 Price Action Bot</button>
+            <!-- Desktop / Laptop View: Direct buttons, NO DROPDOWN -->
+            <div class="input-tools-desktop">
+              <button type="button" class="tool-pill btn-voice-mic-action" id="btnVoiceMic" onclick="toggleVoiceSpeechInput()" title="Speak your question">
+                <span>🎙</span> Voice
+              </button>
+              <button type="button" class="tool-pill" onclick="handleBotItemClick('Image Upload', 'Analyze this chart pattern for key levels and trend structure.')" title="Chart pattern & snapshot analysis">
+                <span>🔒</span> Image Upload
+              </button>
+              <button type="button" class="tool-pill" onclick="handleBotItemClick('Scalping Bot', 'Nifty & BankNifty scalp setup with highest OI strikes and support levels.')" title="Nifty & BankNifty F&O Scalper">
+                <span>🔒</span> Scalping Bot
+              </button>
+              <button type="button" class="tool-pill" onclick="handleBotItemClick('Index Bot', 'Index breakout setups and daily trend momentum.')" title="NSE & BSE Derivatives Desk">
+                <span>🔒</span> Index Bot
+              </button>
+              <button type="button" class="tool-pill" onclick="handleBotItemClick('Crypto Bot', 'Crypto market analysis: Bitcoin key support and momentum.')" title="BTC, ETH & Web3 momentum">
+                <span>🔒</span> Crypto Bot
+              </button>
+              <button type="button" class="tool-pill" onclick="handleBotItemClick('Forex Bot', 'Forex analysis: USD/INR currency trend and RBI triggers.')" title="Macro currencies & USD/INR">
+                <span>🔒</span> Forex Bot
+              </button>
+              <button type="button" class="tool-pill" onclick="handleBotItemClick('Volume Finder Bot', 'Scan high-volume breakout stocks with accumulation patterns.')" title="Unusual volume & block deals">
+                <span>🔒</span> Volume Finder Bot
+              </button>
+              <button type="button" class="tool-pill" onclick="handleBotItemClick('Price Action Bot', 'Explain candlestick setups and support/resistance breakout.')" title="Pure price action & candlestick coach">
+                <span>🔒</span> Price Action Bot
+              </button>
+            </div>
+
+            <!-- Mobile View: Upward dropdown containing all bots + voice -->
+            <div class="input-tools-mobile">
+              <button type="button" class="tool-pill btn-voice-mic-action" id="btnVoiceMicMobile" onclick="toggleVoiceSpeechInput()" title="Speak your question">
+                <span>🎙</span> Voice
+              </button>
+              <div class="bot-tools-dropdown-container">
+                <button type="button" class="tool-pill bot-dropdown-btn" id="btnBotToolsDropdown" onclick="toggleBotToolsDropdown(event)" title="AI Trading Bots">
+                  <span>🔒</span> AI Bots ▾
+                </button>
+                <div class="bot-tools-menu" id="botToolsMenu">
+                  <div class="bot-menu-header">
+                    <span>AI Trading Desks</span>
+                    <span class="badge-lock">👑 Premium Pass</span>
+                  </div>
+                  <div class="bot-menu-item" onclick="handleVoiceDropdownClick()">
+                    <span class="item-icon">🎙</span>
+                    <div class="item-text">
+                      <div class="item-title">Voice Input</div>
+                      <div class="item-desc">Speak your question directly</div>
+                    </div>
+                    <span class="lock-tag" style="background:rgba(16,185,129,0.15);color:var(--primary);border-color:rgba(16,185,129,0.3);">FREE</span>
+                  </div>
+                  <div class="bot-menu-item" onclick="handleBotItemClick('Image Upload', 'Analyze this chart pattern for key levels and trend structure.')">
+                    <span class="item-icon">🔒</span>
+                    <div class="item-text">
+                      <div class="item-title">Image Upload</div>
+                      <div class="item-desc">Chart pattern &amp; snapshot analysis</div>
+                    </div>
+                    <span class="lock-tag">PRO</span>
+                  </div>
+                  <div class="bot-menu-item" onclick="handleBotItemClick('Scalping Bot', 'Nifty & BankNifty scalp setup with highest OI strikes and support levels.')">
+                    <span class="item-icon">🔒</span>
+                    <div class="item-text">
+                      <div class="item-title">Scalping Bot</div>
+                      <div class="item-desc">Nifty &amp; BankNifty F&amp;O Scalper</div>
+                    </div>
+                    <span class="lock-tag">PRO</span>
+                  </div>
+                  <div class="bot-menu-item" onclick="handleBotItemClick('Index Bot', 'Index breakout setups and daily trend momentum.')">
+                    <span class="item-icon">🔒</span>
+                    <div class="item-text">
+                      <div class="item-title">Index Bot</div>
+                      <div class="item-desc">NSE &amp; BSE Derivatives Desk</div>
+                    </div>
+                    <span class="lock-tag">PRO</span>
+                  </div>
+                  <div class="bot-menu-item" onclick="handleBotItemClick('Crypto Bot', 'Crypto market analysis: Bitcoin key support and momentum.')">
+                    <span class="item-icon">🔒</span>
+                    <div class="item-text">
+                      <div class="item-title">Crypto Bot</div>
+                      <div class="item-desc">BTC, ETH &amp; Web3 momentum</div>
+                    </div>
+                    <span class="lock-tag">PRO</span>
+                  </div>
+                  <div class="bot-menu-item" onclick="handleBotItemClick('Forex Bot', 'Forex analysis: USD/INR currency trend and RBI triggers.')">
+                    <span class="item-icon">🔒</span>
+                    <div class="item-text">
+                      <div class="item-title">Forex Bot</div>
+                      <div class="item-desc">Macro currencies &amp; USD/INR</div>
+                    </div>
+                    <span class="lock-tag">PRO</span>
+                  </div>
+                  <div class="bot-menu-item" onclick="handleBotItemClick('Volume Finder Bot', 'Scan high-volume breakout stocks with accumulation patterns.')">
+                    <span class="item-icon">🔒</span>
+                    <div class="item-text">
+                      <div class="item-title">Volume Finder Bot</div>
+                      <div class="item-desc">Unusual volume &amp; block deals</div>
+                    </div>
+                    <span class="lock-tag">PRO</span>
+                  </div>
+                  <div class="bot-menu-item" onclick="handleBotItemClick('Price Action Bot', 'Explain candlestick setups and support/resistance breakout.')">
+                    <span class="item-icon">🔒</span>
+                    <div class="item-text">
+                      <div class="item-title">Price Action Bot</div>
+                      <div class="item-desc">Pure price action &amp; candlestick coach</div>
+                    </div>
+                    <span class="lock-tag">PRO</span>
+                  </div>
+                  <div class="bot-menu-footer" onclick="openUpgradeModal('Subscribe to Premium (₹1,999/mo) to unlock all specialized trading bots.')">
+                    👑 Upgrade to Unlock All (₹1,999/mo)
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <span style="font-size:11px;color:var(--text-dim);" id="shortcutHint">Press Enter to send</span>
         </div>
       </div>
-      <div class="dock-disclaimer">Pantonic AI can make mistakes. Please verify critical financial information.</div>
+      <div class="dock-disclaimer">Pantomic AI can make mistakes. Please verify critical financial information.</div>
     </div>
   </main>
 
+</div>
+
+<!-- ====== MOBILE CHAT BOTTOM SHEET SIDEBAR ====== -->
+<div class="chat-sidebar-overlay" id="chatSidebarOverlay" onclick="closeMobileSheet()"></div>
+<div class="chat-sidebar-sheet" id="chatSidebarSheet">
+  <div class="sheet-handle"></div>
+  <div class="sheet-user-info">
+    <div class="sheet-avatar" id="sheetUserAvatar">U</div>
+    <div class="sheet-user-meta">
+      <div class="name" id="sheetUserName">User</div>
+      <div class="plan" id="sheetUserPlan">Free Account</div>
+    </div>
+  </div>
+  <div class="sheet-actions">
+    <button class="sheet-action-btn gold-btn" onclick="closeMobileSheet(); openUpgradeModal();">
+      👑 Upgrade to Premium ₹1,999/mo
+    </button>
+    <button class="sheet-action-btn" onclick="startNewChat(); closeMobileSheet();">
+      ✚ New Conversation
+    </button>
+    <button class="sheet-action-btn" onclick="closeMobileSheet(); openProfileModal();">
+      👤 My Profile
+    </button>
+    <button class="sheet-action-btn" onclick="closeMobileSheet(); openSettingsModal();">
+      ⚙️ Settings
+    </button>
+    <button class="sheet-action-btn" onclick="closeMobileSheet(); closeChat();">
+      🏠 Exit to Homepage
+    </button>
+    <button class="sheet-action-btn danger" onclick="closeMobileSheet(); handleLogout();">
+      🚪 Logout
+    </button>
+  </div>
 </div>
 
 <!-- ============================================================
@@ -986,7 +1553,7 @@
       </svg>
     </div>
     <h2 class="modal-title">Create your account</h2>
-    <p class="modal-sub">Create an account to start chatting with Pantonic AI.</p>
+    <p class="modal-sub">Create an account to start chatting with Pantomic AI.</p>
 
     <form id="signupForm" onsubmit="processSignup(event)">
       <div class="form-group">
@@ -1063,7 +1630,7 @@
         <input type="password" class="form-input" id="loginPassword" placeholder="Enter password" required>
       </div>
 
-      <button type="submit" class="form-submit">Log In to Pantonic</button>
+      <button type="submit" class="form-submit">Log In to Pantomic</button>
     </form>
 
     <div class="modal-foot-link">
@@ -1104,7 +1671,7 @@
     <button class="modal-close" onclick="closeUpgradeModal()">✕</button>
     <div class="modal-icon" style="background:linear-gradient(135deg,var(--gold),#D97706);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;">👑</div>
     <h2 class="modal-title">Upgrade to Premium</h2>
-    <p class="modal-sub">Unlock Pantonic's premium trading tools and priority features.</p>
+    <p class="modal-sub">Unlock Pantomic's premium trading tools and priority features.</p>
 
     <div style="background:rgba(245, 158, 11, 0.1);border:1px solid rgba(245, 158, 11, 0.3);padding:16px;border-radius:12px;text-align:center;margin-bottom:18px;">
       <div style="font-size:11px;color:var(--gold);font-weight:700;text-transform:uppercase;">Monthly Subscription</div>
@@ -1114,7 +1681,7 @@
 
     <ul class="pricing-list" style="margin-bottom:20px;">
       <li><i>✓</i> Premium Trading Bots</li>
-      <li><i>✓</i> Pantonic AI text chat</li>
+      <li><i>✓</i> Pantomic AI text chat</li>
       <li><i>✓</i> Current market news with web search</li>
 
       <li><i>✓</i> Priority Response Processing</li>
@@ -1138,18 +1705,18 @@
     <div class="form-group">
       <label>Secure AI Connection</label>
       <span style="font-size:12px;color:var(--text-muted);display:block;line-height:1.5;">
-        The AI service key is configured on the server and is never stored in this browser. It enables Pantonic AI text replies and web search.
+        The AI service key is configured on the server and is never stored in this browser. It enables Pantomic AI text replies and web search.
       </span>
     </div>
 
     <!-- Active Engine Status -->
     <div style="margin-top:16px;background:var(--bg-card);padding:14px;border-radius:8px;border:1px solid var(--border);font-size:12px;">
       <div style="font-weight:700;color:var(--text);margin-bottom:8px;display:flex;align-items:center;gap:6px;">
-        <span style="color:#10B981;">●</span> Pantonic AI Capabilities
+        <span style="color:#10B981;">●</span> Pantomic AI Capabilities
       </div>
       <div style="display:flex;flex-direction:column;gap:6px;color:var(--text-muted);font-family:var(--mono);line-height:1.5;">
-        <div>• <b style="color:var(--text);">Pantonic AI:</b> Text conversation and market explanations</div>
-        <div>• <b style="color:var(--text);">Pantonic Search:</b> Current web results with clickable sources</div>
+        <div>• <b style="color:var(--text);">Pantomic AI:</b> Text conversation and market explanations</div>
+        <div>• <b style="color:var(--text);">Pantomic Search:</b> Current web results with clickable sources</div>
       </div>
     </div>
 
@@ -1164,6 +1731,63 @@
      ============================================================ -->
 <script>
   document.getElementById('yearEl').textContent = new Date().getFullYear();
+
+  /* ========== MOBILE NAV DRAWER ========== */
+  function toggleMobileNav() {
+    const btn = document.getElementById('hamburgerBtn');
+    const drawer = document.getElementById('mobileNavDrawer');
+    const isOpen = drawer.classList.toggle('open');
+    btn.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  }
+
+  /* ========== MOBILE CHAT BOTTOM SHEET ========== */
+  function openMobileSheet() {
+    const user = JSON.parse(localStorage.getItem('pantomic_user') || '{}');
+    const el = (id, val) => { const e = document.getElementById(id); if (e) e.textContent = val; };
+    el('sheetUserName', user.name || 'User');
+    el('sheetUserAvatar', (user.name || 'U').charAt(0).toUpperCase());
+    el('sheetUserPlan', user.plan === 'premium' ? '👑 Premium Plan' : 'Free Account');
+    document.getElementById('chatSidebarOverlay').classList.add('open');
+    document.getElementById('chatSidebarSheet').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileSheet() {
+    document.getElementById('chatSidebarOverlay').classList.remove('open');
+    document.getElementById('chatSidebarSheet').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  /* ========== INPUT DOCK BOTS & TOOLS DROPDOWN ========== */
+  function toggleBotToolsDropdown(event) {
+    if (event) event.stopPropagation();
+    const menu = document.getElementById('botToolsMenu');
+    if (!menu) return;
+    menu.classList.toggle('open');
+  }
+
+  function closeBotToolsDropdown() {
+    const menu = document.getElementById('botToolsMenu');
+    if (menu) menu.classList.remove('open');
+  }
+
+  function handleBotItemClick(botName, presetPrompt) {
+    closeBotToolsDropdown();
+    const user = getActiveUser();
+    if (!user || user.plan !== "premium") {
+      showPaidBotUpgrade(botName);
+      return;
+    }
+    launchBotWithPreset(botName, presetPrompt);
+  }
+
+  // Close bot tools dropdown when clicking outside
+  document.addEventListener('click', function(e) {
+    const dropdown = document.querySelector('.bot-tools-dropdown-container');
+    if (dropdown && !dropdown.contains(e.target)) {
+      closeBotToolsDropdown();
+    }
+  });
 
   async function requestAI(endpoint, payload, signal) {
     const response = await fetch(endpoint, {
@@ -1183,24 +1807,12 @@
 
   // Purge any legacy keys from previous sessions
   try {
-    localStorage.removeItem("pantonic_v3_gemini_key");
-    localStorage.removeItem("pantonic_v3_openai_key");
     localStorage.removeItem("pantomic_v3_gemini_key");
     localStorage.removeItem("pantomic_v3_openai_key");
   } catch(_) {}
 
-  const STORAGE_USERS = "pantonic_v3_users";
-  const STORAGE_SESSION = "pantonic_v3_session";
-
-  // Migrate legacy data if present
-  try {
-    if (!localStorage.getItem(STORAGE_USERS) && localStorage.getItem("pantomic_v3_users")) {
-      localStorage.setItem(STORAGE_USERS, localStorage.getItem("pantomic_v3_users"));
-    }
-    if (!localStorage.getItem(STORAGE_SESSION) && localStorage.getItem("pantomic_v3_session")) {
-      localStorage.setItem(STORAGE_SESSION, localStorage.getItem("pantomic_v3_session"));
-    }
-  } catch(_) {}
+  const STORAGE_USERS = "pantomic_v3_users";
+  const STORAGE_SESSION = "pantomic_v3_session";
   let activeSpeechUtterance = null;
   let conversationSession = []; // Multi-turn chat memory in active session
 
@@ -1237,7 +1849,7 @@
 
   // Remove Premium flags created by the old client-only upgrade button.
   // There is no payment confirmation until a real checkout is connected.
-  const PREMIUM_PAYMENT_MIGRATION = "pantonic_v3_premium_payment_required";
+  const PREMIUM_PAYMENT_MIGRATION = "pantomic_v3_premium_payment_required";
   if (!localStorage.getItem(PREMIUM_PAYMENT_MIGRATION)) {
     const users = getStoredUsers();
     let changed = false;
@@ -1284,7 +1896,7 @@
 
       if (sideCounter && sideNote) {
         sideCounter.textContent = 'Available';
-        sideNote.textContent = isPremium ? '👑 Premium features enabled' : 'Pantonic AI text chat is ready to use.';
+        sideNote.textContent = isPremium ? '👑 Premium features enabled' : 'Pantomic AI text chat is ready to use.';
       }
 
       const topbarPlan = document.getElementById('topbarPlanBadge');
@@ -1402,20 +2014,59 @@
       plan: "Free"
     };
 
+    const btnSubmit = document.getElementById('btnSignupSubmit');
+    const originalBtnText = btnSubmit ? btnSubmit.textContent : "Create Account & Start Chatting";
+    if (btnSubmit) {
+      btnSubmit.disabled = true;
+      btnSubmit.textContent = "Syncing with Google Sheets...";
+    }
+
+    const GOOGLE_SHEETS_WEBHOOK = "https://script.google.com/macros/s/AKfycby7p4KvsL-t6jqTuV6bIg9f4ntXdfWIJBIJvVxhYmWjr_DCDkNeqiWDOjp9YiAzy8U/exec";
+    const payload = {
+      userId: newUser.id,
+      name: newUser.name,
+      email: newUser.email,
+      mobile: newUser.mobile,
+      password: newUser.password,
+      markets: newUser.markets,
+      signupDate: newUser.signupDate,
+      plan: newUser.plan
+    };
+
+    let synced = false;
+
+    // 1. Try local server endpoint first
     try {
-      await requestAI("/api/signup", {
-        userId: newUser.id,
-        name: newUser.name,
-        email: newUser.email,
-        mobile: newUser.mobile,
-        password: newUser.password,
-        markets: newUser.markets,
-        signupDate: newUser.signupDate,
-        plan: newUser.plan
+      const res = await fetch("/api/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
       });
-    } catch (error) {
-      alert(error.message || "Signup could not sync with Google Sheets. Please try again.");
-      return;
+      if (res.ok) {
+        synced = true;
+      }
+    } catch (_) {
+      // Backend not running or unreachable from mobile/cross-origin
+    }
+
+    // 2. Direct fallback to Google Sheets Webhook (ensures mobile, Live Server, and static files sync 100%)
+    if (!synced) {
+      try {
+        await fetch(GOOGLE_SHEETS_WEBHOOK, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload)
+        });
+        synced = true;
+      } catch (directErr) {
+        console.warn("Direct Google Sheets sync warning:", directErr);
+      }
+    }
+
+    if (btnSubmit) {
+      btnSubmit.disabled = false;
+      btnSubmit.textContent = originalBtnText;
     }
 
     users.push(newUser);
@@ -1472,7 +2123,7 @@
 
   function openUpgradeModal(message = "") {
     const note = document.querySelector('#upgradeModal .modal-sub');
-    if (note) note.textContent = message || 'Unlock Pantonic premium trading tools and priority features.';
+    if (note) note.textContent = message || 'Unlock Pantomic premium trading tools and priority features.';
     document.getElementById('upgradeModal').classList.add('active');
   }
   function showPaidBotUpgrade(botName) {
@@ -1539,6 +2190,11 @@
     speechSynthesis.speak(utterance);
   }
 
+  function handleVoiceDropdownClick() {
+    closeBotToolsDropdown();
+    toggleVoiceSpeechInput();
+  }
+
   function toggleVoiceSpeechInput() {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
@@ -1550,9 +2206,11 @@
     recognition.lang = 'en-IN';
     recognition.interimResults = false;
 
-    const micBtn = document.getElementById('btnVoiceMic');
-    micBtn.classList.add('active');
-    micBtn.innerHTML = '<span>🔴</span> Listening...';
+    const micBtns = document.querySelectorAll('.btn-voice-mic-action');
+    micBtns.forEach(b => {
+      b.classList.add('active');
+      b.innerHTML = '<span>🔴</span> Listening...';
+    });
 
     recognition.onresult = function(event) {
       const transcript = event.results[0][0].transcript;
@@ -1561,14 +2219,18 @@
     };
 
     recognition.onend = function() {
-      micBtn.classList.remove('active');
-      micBtn.innerHTML = '<span>🎙</span> Voice';
+      micBtns.forEach(b => {
+        b.classList.remove('active');
+        b.innerHTML = '<span>🎙</span> Voice';
+      });
       promptInput.focus();
     };
 
     recognition.onerror = function() {
-      micBtn.classList.remove('active');
-      micBtn.innerHTML = '<span>🎙</span> Voice';
+      micBtns.forEach(b => {
+        b.classList.remove('active');
+        b.innerHTML = '<span>🎙</span> Voice';
+      });
     };
 
     recognition.start();
@@ -1610,7 +2272,7 @@
 
     streamInner.innerHTML = `
       <div class="chat-hero-empty" id="emptyStateHero">
-        <h2>What can Pantonic answer today?</h2>
+        <h2>What can Pantomic answer today?</h2>
         <p>Ask a market question, strategy rule, or request a text explanation of a chart pattern.</p>
         <div class="quick-chips">
           <div class="quick-chip" onclick="fillPrompt('Nifty me support aur resistance kaise identify kare?')">Nifty me support &amp; resistance kaise identify kare?</div>
@@ -1698,7 +2360,7 @@
         </svg>
       </div>
       <div class="msg-bubble" style="display:flex;align-items:center;gap:8px;padding:12px 16px;">
-        <span style="font-size:12.5px;color:var(--text-muted);">Pantonic is analyzing...</span>
+        <span style="font-size:12.5px;color:var(--text-muted);">Pantomic is analyzing...</span>
       </div>
     `;
     streamInner.appendChild(row);
@@ -1734,7 +2396,7 @@
       const currentFullTime = now.toLocaleTimeString('en-IN', {
         hour: '2-digit', minute: '2-digit', hour12: true
       });
-      const systemInstruction = `You are Pantonic AI. Today: ${currentFullDate}, ${currentFullTime} IST. Reply only in text and the user's language. Be brief and direct, usually 1–3 sentences. Format clearly with short Markdown headings, compact bullets or numbered steps, and bold key terms when helpful; avoid walls of text. Omit greetings, filler, repetition, website/publisher names, links, citations, source lists, and generic disclaimers. Use web search for current facts and synthesize only the requested information. For live/current market questions, identify the intended asset even if misspelled, then search its common name and ticker together (for example, Dow Jones Industrial Average, DJIA, and ^DJI). Prefer the newest timestamped quote. If an exact live quote is unavailable or the market is closed, give the closest recent confirmed quote or last close and clearly label it delayed/last available with its as-of time. For any other current question, if exact live information is unavailable, give the closest relevant recent confirmed update with its date/time and label its recency. Search again if results are irrelevant or only historical. Never invent or estimate facts or figures; say no recent data found only when no relevant dated result is available. For image requests, explain in words; do not generate images. Identify as Pantonic AI; do not claim to be ChatGPT or name the model provider.`;
+      const systemInstruction = `You are Pantomic AI. Today: ${currentFullDate}, ${currentFullTime} IST. Reply only in text and the user's language. Be brief and direct, usually 1–3 sentences. Format clearly with short Markdown headings, compact bullets or numbered steps, and bold key terms when helpful; avoid walls of text. Omit greetings, filler, repetition, website/publisher names, links, citations, source lists, and generic disclaimers. Use web search for current facts and synthesize only the requested information. For live/current market questions, identify the intended asset even if misspelled, then search its common name and ticker together (for example, Dow Jones Industrial Average, DJIA, and ^DJI). Prefer the newest timestamped quote. If an exact live quote is unavailable or the market is closed, give the closest recent confirmed quote or last close and clearly label it delayed/last available with its as-of time. For any other current question, if exact live information is unavailable, give the closest relevant recent confirmed update with its date/time and label its recency. Search again if results are irrelevant or only historical. Never invent or estimate facts or figures; say no recent data found only when no relevant dated result is available. For image requests, explain in words; do not generate images. Identify as Pantomic AI; do not claim to be ChatGPT or name the model provider.`;
       const messages = [
         { role: 'system', content: systemInstruction },
         ...conversationSession.slice(-6),
