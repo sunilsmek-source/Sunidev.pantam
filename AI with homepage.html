@@ -613,6 +613,90 @@
     background: rgba(16, 185, 129, 0.15);
   }
 
+  /* Mobile Bots Bottom Sheet (Native Mobile UI) */
+  .mobile-bots-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0, 0, 0, 0.75); z-index: 800; backdrop-filter: blur(6px);
+  }
+  .mobile-bots-overlay.open { display: block; }
+  .mobile-bots-sheet {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    background: #0B1120; border-top: 1px solid var(--border-light);
+    border-radius: 22px 22px 0 0; padding: 0 16px 24px 16px;
+    z-index: 850; transform: translateY(100%); transition: transform .28s cubic-bezier(0.16, 1, 0.3, 1);
+    max-height: 82vh; overflow-y: auto; box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.85);
+  }
+  .mobile-bots-sheet.open { transform: translateY(0); }
+  .mobile-bots-sheet-header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  }
+  .sheet-title-wrap .sheet-title {
+    font-size: 15px; font-weight: 700; color: #fff;
+  }
+  .sheet-title-wrap .sheet-sub {
+    font-size: 11px; color: var(--text-dim); margin-top: 2px;
+  }
+  .sheet-close-btn {
+    background: rgba(255, 255, 255, 0.08); border: 1px solid var(--border);
+    color: var(--text-muted); width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 13px;
+    cursor: pointer; transition: all .15s; flex-shrink: 0;
+  }
+  .sheet-close-btn:hover { background: rgba(255, 255, 255, 0.15); color: #fff; }
+  .mobile-bots-list {
+    display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px;
+  }
+  .mobile-bot-card {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 10px 12px; cursor: pointer;
+    transition: all .15s ease;
+  }
+  .mobile-bot-card:active {
+    background: rgba(16, 185, 129, 0.1); border-color: var(--primary);
+  }
+  .mobile-bot-card .card-icon {
+    font-size: 16px; width: 34px; height: 34px; border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .mobile-bot-card .card-icon.voice-icon {
+    background: rgba(16, 185, 129, 0.12);
+  }
+  .mobile-bot-card .card-info {
+    flex: 1; min-width: 0;
+  }
+  .mobile-bot-card .card-title {
+    font-size: 13px; font-weight: 700; color: #fff;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .mobile-bot-card .card-desc {
+    font-size: 11px; color: var(--text-muted); margin-top: 2px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .mobile-bot-card .tag-free {
+    font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 4px;
+    background: rgba(16, 185, 129, 0.15); color: var(--primary); border: 1px solid rgba(16, 185, 129, 0.3);
+  }
+  .mobile-bot-card .tag-pro {
+    font-size: 9px; font-weight: 700; padding: 1px 5px; border-radius: 4px;
+    background: rgba(245, 158, 11, 0.15); color: var(--gold); border: 1px solid rgba(245, 158, 11, 0.3);
+  }
+  .mobile-bot-card .card-arrow {
+    color: var(--text-dim); font-size: 11px; flex-shrink: 0;
+  }
+  .mobile-sheet-upgrade-btn {
+    width: 100%; padding: 12px 16px; border-radius: 10px;
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(245, 158, 11, 0.1));
+    border: 1px solid rgba(245, 158, 11, 0.4); color: var(--gold);
+    font-size: 12.5px; font-weight: 700; text-align: center; cursor: pointer;
+    box-shadow: 0 4px 14px rgba(245, 158, 11, 0.15); transition: background .15s;
+  }
+  .mobile-sheet-upgrade-btn:hover {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.3), rgba(245, 158, 11, 0.15));
+  }
+
   .toast-notification {
     position: fixed; bottom: 24px; right: 24px;
     background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(8px);
@@ -1371,89 +1455,14 @@
               </button>
             </div>
 
-            <!-- Mobile View: Upward dropdown containing all bots + voice -->
+            <!-- Mobile View: Quick Voice + Tap to open Native Bots Sheet -->
             <div class="input-tools-mobile">
               <button type="button" class="tool-pill btn-voice-mic-action" id="btnVoiceMicMobile" onclick="toggleVoiceSpeechInput()" title="Speak your question">
                 <span>🎙</span> Voice
               </button>
-              <div class="bot-tools-dropdown-container">
-                <button type="button" class="tool-pill bot-dropdown-btn" id="btnBotToolsDropdown" onclick="toggleBotToolsDropdown(event)" title="AI Trading Bots">
-                  <span>🔒</span> AI Bots ▾
-                </button>
-                <div class="bot-tools-menu" id="botToolsMenu">
-                  <div class="bot-menu-header">
-                    <span>AI Trading Desks</span>
-                    <span class="badge-lock">👑 Premium Pass</span>
-                  </div>
-                  <div class="bot-menu-item" onclick="handleVoiceDropdownClick()">
-                    <span class="item-icon">🎙</span>
-                    <div class="item-text">
-                      <div class="item-title">Voice Input</div>
-                      <div class="item-desc">Speak your question directly</div>
-                    </div>
-                    <span class="lock-tag" style="background:rgba(16,185,129,0.15);color:var(--primary);border-color:rgba(16,185,129,0.3);">FREE</span>
-                  </div>
-                  <div class="bot-menu-item" onclick="handleBotItemClick('Image Upload', 'Analyze this chart pattern for key levels and trend structure.')">
-                    <span class="item-icon">🔒</span>
-                    <div class="item-text">
-                      <div class="item-title">Image Upload</div>
-                      <div class="item-desc">Chart pattern &amp; snapshot analysis</div>
-                    </div>
-                    <span class="lock-tag">PRO</span>
-                  </div>
-                  <div class="bot-menu-item" onclick="handleBotItemClick('Scalping Bot', 'Nifty & BankNifty scalp setup with highest OI strikes and support levels.')">
-                    <span class="item-icon">🔒</span>
-                    <div class="item-text">
-                      <div class="item-title">Scalping Bot</div>
-                      <div class="item-desc">Nifty &amp; BankNifty F&amp;O Scalper</div>
-                    </div>
-                    <span class="lock-tag">PRO</span>
-                  </div>
-                  <div class="bot-menu-item" onclick="handleBotItemClick('Index Bot', 'Index breakout setups and daily trend momentum.')">
-                    <span class="item-icon">🔒</span>
-                    <div class="item-text">
-                      <div class="item-title">Index Bot</div>
-                      <div class="item-desc">NSE &amp; BSE Derivatives Desk</div>
-                    </div>
-                    <span class="lock-tag">PRO</span>
-                  </div>
-                  <div class="bot-menu-item" onclick="handleBotItemClick('Crypto Bot', 'Crypto market analysis: Bitcoin key support and momentum.')">
-                    <span class="item-icon">🔒</span>
-                    <div class="item-text">
-                      <div class="item-title">Crypto Bot</div>
-                      <div class="item-desc">BTC, ETH &amp; Web3 momentum</div>
-                    </div>
-                    <span class="lock-tag">PRO</span>
-                  </div>
-                  <div class="bot-menu-item" onclick="handleBotItemClick('Forex Bot', 'Forex analysis: USD/INR currency trend and RBI triggers.')">
-                    <span class="item-icon">🔒</span>
-                    <div class="item-text">
-                      <div class="item-title">Forex Bot</div>
-                      <div class="item-desc">Macro currencies &amp; USD/INR</div>
-                    </div>
-                    <span class="lock-tag">PRO</span>
-                  </div>
-                  <div class="bot-menu-item" onclick="handleBotItemClick('Volume Finder Bot', 'Scan high-volume breakout stocks with accumulation patterns.')">
-                    <span class="item-icon">🔒</span>
-                    <div class="item-text">
-                      <div class="item-title">Volume Finder Bot</div>
-                      <div class="item-desc">Unusual volume &amp; block deals</div>
-                    </div>
-                    <span class="lock-tag">PRO</span>
-                  </div>
-                  <div class="bot-menu-item" onclick="handleBotItemClick('Price Action Bot', 'Explain candlestick setups and support/resistance breakout.')">
-                    <span class="item-icon">🔒</span>
-                    <div class="item-text">
-                      <div class="item-title">Price Action Bot</div>
-                      <div class="item-desc">Pure price action &amp; candlestick coach</div>
-                    </div>
-                    <span class="lock-tag">PRO</span>
-                  </div>
-                  <div class="bot-menu-footer" onclick="openUpgradeModal('Subscribe to Premium (₹1,999/mo) to unlock all specialized trading bots.')">
-                    👑 Upgrade to Unlock All (₹1,999/mo)
-                  </div>
-                </div>
-              </div>
+              <button type="button" class="tool-pill bot-dropdown-btn" id="btnMobileBotsSheetOpen" onclick="openMobileBotsSheet()" title="Specialized AI Trading Bots">
+                <span>🔒</span> AI Bots (7) ▾
+              </button>
             </div>
           </div>
           <span style="font-size:11px;color:var(--text-dim);" id="shortcutHint">Press Enter to send</span>
@@ -1463,6 +1472,105 @@
     </div>
   </main>
 
+</div>
+
+<!-- ====== MOBILE BOTS BOTTOM SHEET (NATIVE POPUP) ====== -->
+<div class="mobile-bots-overlay" id="mobileBotsOverlay" onclick="closeMobileBotsSheet()"></div>
+<div class="mobile-bots-sheet" id="mobileBotsSheet">
+  <div class="sheet-handle"></div>
+  <div class="mobile-bots-sheet-header">
+    <div class="sheet-title-wrap">
+      <div class="sheet-title">🤖 AI Trading Bots &amp; Desks</div>
+      <div class="sheet-sub">Select specialized AI desk for targeted market research</div>
+    </div>
+    <button class="sheet-close-btn" onclick="closeMobileBotsSheet()" aria-label="Close">✕</button>
+  </div>
+  
+  <div class="mobile-bots-list">
+    <!-- Voice (Free) -->
+    <div class="mobile-bot-card" onclick="handleVoiceMobileClick()">
+      <div class="card-icon voice-icon">🎙</div>
+      <div class="card-info">
+        <div class="card-title">Voice Dictation <span class="tag-free">FREE</span></div>
+        <div class="card-desc">Speak your questions naturally in Hindi or English</div>
+      </div>
+      <div class="card-arrow">➤</div>
+    </div>
+
+    <!-- Image Upload -->
+    <div class="mobile-bot-card" onclick="handleBotItemClick('Image Upload', 'Analyze this chart pattern for key levels and trend structure.')">
+      <div class="card-icon">🔒</div>
+      <div class="card-info">
+        <div class="card-title">Image Upload <span class="tag-pro">PRO</span></div>
+        <div class="card-desc">Chart pattern &amp; support/resistance snapshot analysis</div>
+      </div>
+      <div class="card-arrow">➤</div>
+    </div>
+
+    <!-- Scalping Bot -->
+    <div class="mobile-bot-card" onclick="handleBotItemClick('Scalping Bot', 'Nifty & BankNifty scalp setup with highest OI strikes and support levels.')">
+      <div class="card-icon">🔒</div>
+      <div class="card-info">
+        <div class="card-title">Scalping Bot <span class="tag-pro">PRO</span></div>
+        <div class="card-desc">Nifty &amp; BankNifty F&amp;O 1-min &amp; 5-min momentum setups</div>
+      </div>
+      <div class="card-arrow">➤</div>
+    </div>
+
+    <!-- Index Bot -->
+    <div class="mobile-bot-card" onclick="handleBotItemClick('Index Bot', 'Index breakout setups and daily trend momentum.')">
+      <div class="card-icon">🔒</div>
+      <div class="card-info">
+        <div class="card-title">Index Bot <span class="tag-pro">PRO</span></div>
+        <div class="card-desc">NSE &amp; BSE Derivatives, PCR ratio and institutional bias</div>
+      </div>
+      <div class="card-arrow">➤</div>
+    </div>
+
+    <!-- Crypto Bot -->
+    <div class="mobile-bot-card" onclick="handleBotItemClick('Crypto Bot', 'Crypto market analysis: Bitcoin key support and momentum.')">
+      <div class="card-icon">🔒</div>
+      <div class="card-info">
+        <div class="card-title">Crypto Bot <span class="tag-pro">PRO</span></div>
+        <div class="card-desc">BTC, ETH, Altcoins &amp; Web3 funding rates &amp; levels</div>
+      </div>
+      <div class="card-arrow">➤</div>
+    </div>
+
+    <!-- Forex Bot -->
+    <div class="mobile-bot-card" onclick="handleBotItemClick('Forex Bot', 'Forex analysis: USD/INR currency trend and RBI triggers.')">
+      <div class="card-icon">🔒</div>
+      <div class="card-info">
+        <div class="card-title">Forex Bot <span class="tag-pro">PRO</span></div>
+        <div class="card-desc">USD/INR, DXY dollar index and global macro triggers</div>
+      </div>
+      <div class="card-arrow">➤</div>
+    </div>
+
+    <!-- Volume Finder Bot -->
+    <div class="mobile-bot-card" onclick="handleBotItemClick('Volume Finder Bot', 'Scan high-volume breakout stocks with accumulation patterns.')">
+      <div class="card-icon">🔒</div>
+      <div class="card-info">
+        <div class="card-title">Volume Finder Bot <span class="tag-pro">PRO</span></div>
+        <div class="card-desc">Unusual spikes, block deals and institutional footprints</div>
+      </div>
+      <div class="card-arrow">➤</div>
+    </div>
+
+    <!-- Price Action Bot -->
+    <div class="mobile-bot-card" onclick="handleBotItemClick('Price Action Bot', 'Explain candlestick setups and support/resistance breakout.')">
+      <div class="card-icon">🔒</div>
+      <div class="card-info">
+        <div class="card-title">Price Action Bot <span class="tag-pro">PRO</span></div>
+        <div class="card-desc">Pure price action, liquidity sweeps &amp; candlestick setups</div>
+      </div>
+      <div class="card-arrow">➤</div>
+    </div>
+  </div>
+
+  <div class="mobile-sheet-upgrade-btn" onclick="openUpgradeModal('Subscribe to Premium (₹1,999/mo) to unlock all specialized trading bots.')">
+    👑 Upgrade to Unlock All Bots (₹1,999/mo)
+  </div>
 </div>
 
 <!-- ====== MOBILE CHAT BOTTOM SHEET SIDEBAR ====== -->
@@ -1709,21 +1817,41 @@
     document.body.style.overflow = '';
   }
 
-  /* ========== INPUT DOCK BOTS & TOOLS DROPDOWN ========== */
+  /* ========== MOBILE BOTS BOTTOM SHEET & POPUP ========== */
+  function openMobileBotsSheet() {
+    const sheet = document.getElementById('mobileBotsSheet');
+    const overlay = document.getElementById('mobileBotsOverlay');
+    if (sheet) sheet.classList.add('open');
+    if (overlay) overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMobileBotsSheet() {
+    const sheet = document.getElementById('mobileBotsSheet');
+    const overlay = document.getElementById('mobileBotsOverlay');
+    if (sheet) sheet.classList.remove('open');
+    if (overlay) overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function handleVoiceMobileClick() {
+    closeMobileBotsSheet();
+    toggleVoiceSpeechInput();
+  }
+
   function toggleBotToolsDropdown(event) {
-    if (event) event.stopPropagation();
-    const menu = document.getElementById('botToolsMenu');
-    if (!menu) return;
-    menu.classList.toggle('open');
+    if (window.innerWidth <= 768) {
+      openMobileBotsSheet();
+      return;
+    }
   }
 
   function closeBotToolsDropdown() {
-    const menu = document.getElementById('botToolsMenu');
-    if (menu) menu.classList.remove('open');
+    closeMobileBotsSheet();
   }
 
   function handleBotItemClick(botName, presetPrompt) {
-    closeBotToolsDropdown();
+    closeMobileBotsSheet();
     const user = getActiveUser();
     if (!user || user.plan !== "premium") {
       showPaidBotUpgrade(botName);
@@ -1731,14 +1859,6 @@
     }
     launchBotWithPreset(botName, presetPrompt);
   }
-
-  // Close bot tools dropdown when clicking outside
-  document.addEventListener('click', function(e) {
-    const dropdown = document.querySelector('.bot-tools-dropdown-container');
-    if (dropdown && !dropdown.contains(e.target)) {
-      closeBotToolsDropdown();
-    }
-  });
 
   async function requestAI(endpoint, payload, signal) {
     const response = await fetch(endpoint, {

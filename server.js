@@ -7,8 +7,8 @@ const root = dirname(fileURLToPath(import.meta.url));
 const host = process.env.HOST || "0.0.0.0";
 const port = Number(process.env.PORT || 3000);
 const maxBodyBytes = 1024 * 1024;
-const openAiResponsesUrl = "https://api.openai.com/v1/chat/completions";
-const chatModel = process.env.OPENAI_MODEL || "gpt-4o-mini";
+const openAiResponsesUrl = process.env.OPENAI_API_URL || "https://api.openai.com/v1/responses";
+const chatModel = process.env.OPENAI_MODEL || "gpt-6-luna";
 const localGoogleSheetsWebhookUrl = "https://script.google.com/macros/s/AKfycby7p4KvsL-t6jqTuV6bIg9f4ntXdfWIJBIJvVxhYmWjr_DCDkNeqiWDOjp9YiAzy8U/exec";
 
 async function loadLocalEnv() {
@@ -284,12 +284,27 @@ async function handleApi(request, response, pathname) {
 
     if (pathname === "/api/chat") {
       const messages = normalizeMessages(body.messages);
-      const data = await callOpenAI({
-        model: chatModel,
-        messages: messages,
-        max_tokens: 600,
-        temperature: 0.7
-      });
+      const isResponsesEndpoint = openAiResponsesUrl.includes("/responses");
+      const forceWebSearch = requiresFreshWebSearch(messages);
+
+      const requestPayload = isResponsesEndpoint
+        ? {
+            model: chatModel,
+            reasoning: { effort: forceWebSearch ? "low" : "none" },
+            input: messages,
+            tools: [{ type: "web_search", search_context_size: forceWebSearch ? "medium" : "low", external_web_access: true }],
+            tool_choice: forceWebSearch ? "required" : "auto",
+            max_output_tokens: 1200,
+            store: false
+          }
+        : {
+            model: chatModel,
+            messages: messages,
+            max_tokens: 800,
+            temperature: 0.7
+          };
+
+      const data = await callOpenAI(requestPayload);
       sendJson(response, 200, { text: extractOutput(data) });
       return;
     }
